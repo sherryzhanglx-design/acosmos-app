@@ -14,7 +14,7 @@ This repository contains the complete source code for the A.Cosmos platform.
 *   **AI Guardian Coaches**: Engage in deep conversations with four distinct AI coaches (Andy, Anya, Alma, Axel), each powered by OpenAI's GPT-5.2 for nuanced and insightful dialogue.
 *   **Progressive Web App (PWA)**: Install A.Cosmos on your mobile or desktop device for a native-app-like experience, including offline access and push notifications.
 *   **Persistent Data**: User accounts, conversation history, and reflections are securely stored in a PostgreSQL database (Neon Serverless), managed by the Drizzle ORM.
-*   **Secure Authentication**: User authentication is handled via a secure OAuth 2.0 flow, ensuring user data privacy.
+*   **Secure Authentication**: User authentication is handled via **Google OAuth 2.0**, ensuring user data privacy and seamless sign-in.
 *   **Usage & Admin Dashboards**: Built-in dashboards for monitoring application usage and managing users.
 *   **Cosmic-Themed UI**: An immersive, beautiful user interface built with TailwindCSS, designed to foster a sense of calm and introspection.
 
@@ -41,7 +41,7 @@ graph TD
     end
 
     subgraph Third-Party APIs
-        E[Manus OAuth]
+        E[Google OAuth 2.0]
         F[OpenAI GPT-5.2]
     end
 
@@ -55,7 +55,7 @@ graph TD
 *   **Frontend**: Hosted on **Vercel** for optimal performance and global CDN distribution.
 *   **Backend**: Hosted on **Railway** for simplified management and pay-as-you-go scaling.
 *   **Database**: Hosted on **Neon** for serverless PostgreSQL with automatic scaling and generous free tier.
-*   **External APIs**: Integrates with **Manus OAuth** for authentication and **OpenAI** for advanced AI capabilities.
+*   **External APIs**: Integrates with **Google OAuth 2.0** for authentication and **OpenAI** for advanced AI capabilities.
 
 ## Technology Stack
 
