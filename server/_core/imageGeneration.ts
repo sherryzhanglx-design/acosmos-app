@@ -1,19 +1,8 @@
 /**
- * Image generation helper using internal ImageService
+ * Image generation helper
  *
- * Example usage:
- *   const { url: imageUrl } = await generateImage({
- *     prompt: "A serene landscape with mountains"
- *   });
- *
- * For editing:
- *   const { url: imageUrl } = await generateImage({
- *     prompt: "Add a rainbow to this landscape",
- *     originalImages: [{
- *       url: "https://example.com/original.jpg",
- *       mimeType: "image/jpeg"
- *     }]
- *   });
+ * Phase 1: Graceful degradation — returns a placeholder when Forge API is unavailable.
+ * Phase 3 (future): Will be replaced with OpenAI DALL-E 3 / gpt-image-1 API.
  */
 import { storagePut } from "server/storage";
 import { ENV } from "./env";
@@ -34,11 +23,10 @@ export type GenerateImageResponse = {
 export async function generateImage(
   options: GenerateImageOptions
 ): Promise<GenerateImageResponse> {
-  if (!ENV.forgeApiUrl) {
-    throw new Error("BUILT_IN_FORGE_API_URL is not configured");
-  }
-  if (!ENV.forgeApiKey) {
-    throw new Error("BUILT_IN_FORGE_API_KEY is not configured");
+  // Graceful degradation: if Forge API is not configured, return empty
+  if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
+    console.warn("[ImageGeneration] Forge API not configured. Image generation is disabled until Phase 3 migration.");
+    return { url: undefined };
   }
 
   // Build the full URL by appending the service path to the base URL

@@ -10,9 +10,8 @@ function getStorageConfig(): StorageConfig {
   const apiKey = ENV.forgeApiKey;
 
   if (!baseUrl || !apiKey) {
-    throw new Error(
-      "Storage proxy credentials missing: set BUILT_IN_FORGE_API_URL and BUILT_IN_FORGE_API_KEY"
-    );
+    console.warn("[Storage] Forge API not configured. Storage operations will be unavailable until Phase 3 migration.");
+    return { baseUrl: "", apiKey: "" };
   }
 
   return { baseUrl: baseUrl.replace(/\/+$/, ""), apiKey };

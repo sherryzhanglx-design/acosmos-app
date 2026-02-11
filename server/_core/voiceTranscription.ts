@@ -75,18 +75,13 @@ export async function transcribeAudio(
 ): Promise<TranscriptionResponse | TranscriptionError> {
   try {
     // Step 1: Validate environment configuration
-    if (!ENV.forgeApiUrl) {
+    // Graceful degradation: if Forge API is not configured, return informative error
+    if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
+      console.warn("[VoiceTranscription] Forge API not configured. Voice transcription is disabled until Phase 3 migration.");
       return {
-        error: "Voice transcription service is not configured",
+        error: "Voice transcription is temporarily unavailable",
         code: "SERVICE_ERROR",
-        details: "BUILT_IN_FORGE_API_URL is not set"
-      };
-    }
-    if (!ENV.forgeApiKey) {
-      return {
-        error: "Voice transcription service authentication is missing",
-        code: "SERVICE_ERROR",
-        details: "BUILT_IN_FORGE_API_KEY is not set"
+        details: "Voice transcription service is being migrated. It will be available soon."
       };
     }
 
