@@ -16,12 +16,14 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Support from "./pages/Support";
 import PurchaseTerms from "./pages/PurchaseTerms";
+import Login from "./pages/Login";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
       <Route path="/chat/:roleSlug?" component={Chat} />
       <Route path="/conversation/:id" component={Chat} />
       <Route path="/history" component={History} />
