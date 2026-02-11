@@ -1,9 +1,10 @@
 /**
  * OpenAI GPT-5.2 integration for specific guardians.
- * Uses the user's own OpenAI API key (OpenAIAPIKey4Manus).
+ * Uses the unified OPENAI_API_KEY (or legacy OpenAIAPIKey4Manus).
  * Configured for all 4 active guardians (Andy, Anya, Alma, Axel).
  */
 
+import { ENV } from "./_core/env";
 import type { Message, InvokeResult } from "./_core/llm";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -16,14 +17,7 @@ const OPENAI_GUARDIAN_SLUGS = new Set(["career", "anxiety", "relationships", "tr
  * Check if a guardian slug should use OpenAI GPT
  */
 export function shouldUseOpenAI(slug: string): boolean {
-  return OPENAI_GUARDIAN_SLUGS.has(slug) && !!getOpenAIKey();
-}
-
-/**
- * Get the OpenAI API key from environment
- */
-function getOpenAIKey(): string | undefined {
-  return process.env.OpenAIAPIKey4Manus;
+  return OPENAI_GUARDIAN_SLUGS.has(slug) && !!ENV.openaiApiKey;
 }
 
 /**
@@ -45,9 +39,9 @@ function normalizeMessages(messages: Message[]): Array<{ role: string; content: 
  * Returns the same InvokeResult shape as the built-in invokeLLM for compatibility.
  */
 export async function invokeOpenAI(params: { messages: Message[] }): Promise<InvokeResult> {
-  const apiKey = getOpenAIKey();
+  const apiKey = ENV.openaiApiKey;
   if (!apiKey) {
-    throw new Error("OpenAI API key (OpenAIAPIKey4Manus) is not configured");
+    throw new Error("OpenAI API key is not configured. Set OPENAI_API_KEY or OpenAIAPIKey4Manus environment variable.");
   }
 
   const payload = {
