@@ -1,5 +1,6 @@
 import { eq, sql, and, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
 import { 
   InsertUser, users, 
   coachingRoles, InsertCoachingRole, CoachingRole,
@@ -17,7 +18,8 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const client = neon(process.env.DATABASE_URL);
+      _db = drizzle(client);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -81,9 +83,12 @@ export async function upsertUser(user: InsertUser): Promise<{ isNewUser: boolean
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
-      set: updateSet,
-    });
+    // PostgreSQL upsert using ON CONFLICT
+    if (isNewUser) {
+      await db.insert(users).values(values);
+    } else {
+      await db.update(users).set(updateSet).where(eq(users.openId, user.openId));
+    }
 
     return { isNewUser };
   } catch (error) {
@@ -258,8 +263,8 @@ export async function createConversation(data: InsertConversation): Promise<numb
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(conversations).values(data);
-  return Number(result[0].insertId);
+  const result = await db.insert(conversations).values(data).returning({ id: conversations.id });
+  return result[0].id;
 }
 
 export async function updateConversation(id: number, data: Partial<InsertConversation>): Promise<void> {
@@ -285,8 +290,8 @@ export async function createMessage(data: InsertMessage): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(messages).values(data);
-  return Number(result[0].insertId);
+  const result = await db.insert(messages).values(data).returning({ id: messages.id });
+  return result[0].id;
 }
 
 // ============ User Preferences Operations ============
@@ -305,12 +310,20 @@ export async function upsertUserPreferences(data: InsertUserPreferences): Promis
   const db = await getDb();
   if (!db) return;
   
-  await db.insert(userPreferences).values(data).onDuplicateKeyUpdate({
-    set: {
+  // PostgreSQL upsert: check if exists, then insert or update
+  const existing = await db.select({ id: userPreferences.id })
+    .from(userPreferences)
+    .where(eq(userPreferences.userId, data.userId))
+    .limit(1);
+  
+  if (existing.length === 0) {
+    await db.insert(userPreferences).values(data);
+  } else {
+    await db.update(userPreferences).set({
       preferredRoleId: data.preferredRoleId,
       voiceEnabled: data.voiceEnabled,
-    }
-  });
+    }).where(eq(userPreferences.userId, data.userId));
+  }
 }
 
 // ============ Admin Analytics Operations ============
@@ -362,7 +375,7 @@ export async function getCoachUsageStats() {
     roleName: coachingRoles.name,
     roleSlug: coachingRoles.slug,
     conversationCount: sql<number>`COUNT(${conversations.id})`,
-    messageCount: sql<number>`(SELECT COUNT(*) FROM ${messages} WHERE ${messages.conversationId} IN (SELECT id FROM ${conversations} c2 WHERE c2.roleId = ${conversations.roleId}))`,
+    messageCount: sql<number>`(SELECT COUNT(*) FROM messages WHERE messages."conversationId" IN (SELECT id FROM conversations c2 WHERE c2."roleId" = ${conversations.roleId}))`,
   })
     .from(conversations)
     .leftJoin(coachingRoles, eq(conversations.roleId, coachingRoles.id))
@@ -443,7 +456,7 @@ export async function getAllUsers(limit: number = 100, offset: number = 0) {
     role: users.role,
     createdAt: users.createdAt,
     lastSignedIn: users.lastSignedIn,
-    conversationCount: sql<number>`(SELECT COUNT(*) FROM ${conversations} WHERE ${conversations.userId} = ${users.id})`,
+    conversationCount: sql<number>`(SELECT COUNT(*) FROM conversations WHERE conversations."userId" = ${users.id})`,
   })
     .from(users)
     .orderBy(sql`${users.createdAt} DESC`)
@@ -514,8 +527,8 @@ export async function saveCardToHistory(data: InsertCardHistory): Promise<number
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(cardHistory).values(data);
-  return Number(result[0].insertId);
+  const result = await db.insert(cardHistory).values(data).returning({ id: cardHistory.id });
+  return result[0].id;
 }
 
 export async function getUserCardHistory(userId: number, guide?: string): Promise<CardHistory[]> {
