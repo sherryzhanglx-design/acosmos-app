@@ -38,7 +38,7 @@
 
 3.  **查看Railway (后端) 状态**：
     *   登录 [Railway](https://railway.app)。
-    *   进入您的项目，查看 `acosmos-app` 后端服务和 `mysql` 数据库服务。
+    *   进入您的项目，查看 `acosmos-app` 后端服务。数据库托管在 Neon 上，可登录 [Neon Console](https://console.neon.tech) 查看数据库状态。
     *   如果服务卡片上有红色的标记或错误信息，请**截图**。
 
 ## 步骤三：尝试“手动重启”(5分钟)

@@ -8,17 +8,17 @@ This repository contains the complete source code for the A.Cosmos platform.
 
 ---
 
-## ✨ Features
+## Features
 
 *   **Full-Stack Application**: Modern, robust, and scalable architecture using React/Vite for the frontend and Express/tRPC for the backend.
 *   **AI Guardian Coaches**: Engage in deep conversations with four distinct AI coaches (Andy, Anya, Alma, Axel), each powered by OpenAI's GPT-5.2 for nuanced and insightful dialogue.
 *   **Progressive Web App (PWA)**: Install A.Cosmos on your mobile or desktop device for a native-app-like experience, including offline access and push notifications.
-*   **Persistent Data**: User accounts, conversation history, and reflections are securely stored in a MySQL database, managed by the Drizzle ORM.
+*   **Persistent Data**: User accounts, conversation history, and reflections are securely stored in a PostgreSQL database (Neon Serverless), managed by the Drizzle ORM.
 *   **Secure Authentication**: User authentication is handled via a secure OAuth 2.0 flow, ensuring user data privacy.
 *   **Usage & Admin Dashboards**: Built-in dashboards for monitoring application usage and managing users.
 *   **Cosmic-Themed UI**: An immersive, beautiful user interface built with TailwindCSS, designed to foster a sense of calm and introspection.
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 The A.Cosmos platform is designed with a decoupled frontend and backend, deployed on modern PaaS providers for high availability and low maintenance.
 
@@ -34,7 +34,10 @@ graph TD
 
     subgraph Railway
         C[Node.js/Express Backend]
-        D[MySQL Database]
+    end
+
+    subgraph Neon
+        D[PostgreSQL Database]
     end
 
     subgraph Third-Party APIs
@@ -50,18 +53,19 @@ graph TD
 ```
 
 *   **Frontend**: Hosted on **Vercel** for optimal performance and global CDN distribution.
-*   **Backend & Database**: Hosted on **Railway** for simplified management and pay-as-you-go scaling.
+*   **Backend**: Hosted on **Railway** for simplified management and pay-as-you-go scaling.
+*   **Database**: Hosted on **Neon** for serverless PostgreSQL with automatic scaling and generous free tier.
 *   **External APIs**: Integrates with **Manus OAuth** for authentication and **OpenAI** for advanced AI capabilities.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 *   **Frontend**: React, Vite, TypeScript, TailwindCSS, tRPC Client, Wouter
 *   **Backend**: Node.js, Express, TypeScript, tRPC Server
-*   **Database**: MySQL, Drizzle ORM
-*   **Deployment**: Vercel (Frontend), Railway (Backend & DB)
+*   **Database**: PostgreSQL (Neon Serverless), Drizzle ORM
+*   **Deployment**: Vercel (Frontend), Railway (Backend), Neon (Database)
 *   **Package Manager**: pnpm
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 /acosmos-app
@@ -72,7 +76,7 @@ graph TD
 │   ├── _core/      # Core server setup (Express, tRPC, Auth)
 │   └── routers.ts  # tRPC API endpoint definitions
 ├── drizzle/        # Database schema and migration files
-│   └── schema.ts   # Drizzle ORM schema definitions
+│   └── schema.ts   # Drizzle ORM schema definitions (PostgreSQL)
 ├── shared/         # Code shared between client and server
 │   └── types.ts    # Shared TypeScript types
 ├── prompts/        # Prompt engineering files for AI coaches
@@ -81,7 +85,7 @@ graph TD
 └── README.md       # This file
 ```
 
-## ⚙️ Getting Started (Local Development)
+## Getting Started (Local Development)
 
 Follow these steps to set up and run the project on your local machine.
 
@@ -111,11 +115,11 @@ Copy the environment variable template and fill in the required values.
 cp .env.example .env
 ```
 
-Now, open the `.env` file and provide the necessary credentials for your database, auth provider, and OpenAI.
+Now, open the `.env` file and provide the necessary credentials for your Neon database, auth provider, and OpenAI.
 
 ### 4. Set Up Database
 
-This project uses Drizzle ORM. To apply the schema to your database, run:
+This project uses Drizzle ORM with Neon PostgreSQL. To apply the schema to your database, run:
 
 ```bash
 pnpm run db:push
@@ -131,16 +135,17 @@ pnpm run dev
 
 The application should now be running on `http://localhost:3000` (or the next available port).
 
-## 🚀 Deployment
+## Deployment
 
-This project is set up for automated CI/CD (Continuous Integration/Continuous Deployment) via Vercel and Railway.
+This project is set up for automated CI/CD (Continuous Integration/Continuous Deployment) via Vercel, Railway, and Neon.
 
 1.  **Vercel (Frontend)**: Connect your GitHub repository to a new Vercel project. Vercel will automatically detect the Vite configuration and set up the build process. Link the `A.cosmos.app` domain here.
-2.  **Railway (Backend & Database)**: Connect the same GitHub repository to a new Railway project. Create a MySQL database service and a Node.js service. Railway will use the `pnpm run build` and `pnpm start` commands to deploy the backend. Set the required environment variables in the Railway service configuration.
+2.  **Railway (Backend)**: Connect the same GitHub repository to a new Railway project. Create a Node.js service. Railway will use the `pnpm run build` and `pnpm start` commands to deploy the backend. Set the required environment variables (including the Neon `DATABASE_URL`) in the Railway service configuration.
+3.  **Neon (Database)**: Create a free PostgreSQL database on Neon. Copy the connection string and set it as the `DATABASE_URL` environment variable in Railway. Run `pnpm run db:push` to initialize the schema.
 
-Once connected, any push to the `main` branch will automatically trigger a new deployment on both platforms.
+Once connected, any push to the `main` branch will automatically trigger a new deployment on both Vercel and Railway.
 
-## 📜 Available Scripts
+## Available Scripts
 
 *   `pnpm dev`: Starts the development server for both frontend and backend.
 *   `pnpm build`: Builds the frontend and backend for production.

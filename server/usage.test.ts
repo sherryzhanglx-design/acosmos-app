@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { drizzle } from 'drizzle-orm/mysql2';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import { eq, sql } from 'drizzle-orm';
 import { userUsage, usageLogs, users } from '../drizzle/schema';
 
@@ -8,7 +9,8 @@ let db: ReturnType<typeof drizzle>;
 
 beforeAll(async () => {
   if (process.env.DATABASE_URL) {
-    db = drizzle(process.env.DATABASE_URL);
+    const client = neon(process.env.DATABASE_URL);
+    db = drizzle(client);
   }
 });
 
@@ -19,9 +21,12 @@ describe('Usage Tracking Schema', () => {
       return;
     }
     
-    // Query table structure
-    const result = await db.execute(sql`DESCRIBE user_usage`);
-    const columns = (result[0] as any[]).map((row: any) => row.Field);
+    // Query table structure using PostgreSQL information_schema
+    const result = await db.execute(sql`
+      SELECT column_name FROM information_schema.columns 
+      WHERE table_name = 'user_usage' ORDER BY ordinal_position
+    `);
+    const columns = (result.rows as any[]).map((row: any) => row.column_name);
     
     // Verify essential columns exist
     expect(columns).toContain('id');
@@ -44,9 +49,12 @@ describe('Usage Tracking Schema', () => {
       return;
     }
     
-    // Query table structure
-    const result = await db.execute(sql`DESCRIBE usage_logs`);
-    const columns = (result[0] as any[]).map((row: any) => row.Field);
+    // Query table structure using PostgreSQL information_schema
+    const result = await db.execute(sql`
+      SELECT column_name FROM information_schema.columns 
+      WHERE table_name = 'usage_logs' ORDER BY ordinal_position
+    `);
+    const columns = (result.rows as any[]).map((row: any) => row.column_name);
     
     // Verify essential columns exist
     expect(columns).toContain('id');
@@ -64,14 +72,16 @@ describe('Usage Tracking Schema', () => {
       return;
     }
     
-    // Query column type
-    const result = await db.execute(sql`SHOW COLUMNS FROM user_usage WHERE Field = 'tier'`);
-    const tierColumn = (result[0] as any[])[0];
+    // Query PostgreSQL enum values
+    const result = await db.execute(sql`
+      SELECT unnest(enum_range(NULL::tier))::text AS value
+    `);
+    const values = (result.rows as any[]).map((row: any) => row.value);
     
     // Verify enum contains expected values
-    expect(tierColumn.Type).toContain('free');
-    expect(tierColumn.Type).toContain('basic');
-    expect(tierColumn.Type).toContain('premium');
+    expect(values).toContain('free');
+    expect(values).toContain('basic');
+    expect(values).toContain('premium');
   });
 
   it('should have correct actionType enum values', async () => {
@@ -80,16 +90,18 @@ describe('Usage Tracking Schema', () => {
       return;
     }
     
-    // Query column type
-    const result = await db.execute(sql`SHOW COLUMNS FROM usage_logs WHERE Field = 'actionType'`);
-    const actionTypeColumn = (result[0] as any[])[0];
+    // Query PostgreSQL enum values
+    const result = await db.execute(sql`
+      SELECT unnest(enum_range(NULL::action_type))::text AS value
+    `);
+    const values = (result.rows as any[]).map((row: any) => row.value);
     
     // Verify enum contains expected values
-    expect(actionTypeColumn.Type).toContain('conversation_start');
-    expect(actionTypeColumn.Type).toContain('message_sent');
-    expect(actionTypeColumn.Type).toContain('card_drawn');
-    expect(actionTypeColumn.Type).toContain('apex_session');
-    expect(actionTypeColumn.Type).toContain('voice_input');
+    expect(values).toContain('conversation_start');
+    expect(values).toContain('message_sent');
+    expect(values).toContain('card_drawn');
+    expect(values).toContain('apex_session');
+    expect(values).toContain('voice_input');
   });
 });
 
