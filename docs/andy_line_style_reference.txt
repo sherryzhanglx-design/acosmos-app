@@ -1,0 +1,18 @@
+Andy Avatar Line Style Reference
+=================================
+
+Andy's avatar has the correct line thickness that displays well at small sizes.
+
+Key characteristics:
+- THICK, BOLD black outlines (approximately 2-3px stroke weight)
+- Clean, confident strokes - not sketchy or thin
+- Simple, minimal details - not overly detailed
+- Strong contrast between black lines and white background
+- Hair drawn with bold curved strokes, not fine wispy lines
+- Glasses frames are thick and clearly visible
+- Facial features (eyes, nose, mouth) drawn with confident strokes
+- Polo shirt collar clearly defined with bold lines
+- Shoulders extend to edges with clear lines
+
+The other avatars (Anya, Alma, Axel) need to match this BOLD line style.
+Current issues: Lines are too thin, too detailed, appear faint/fuzzy at small sizes.

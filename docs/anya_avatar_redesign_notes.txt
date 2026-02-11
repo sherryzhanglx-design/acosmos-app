@@ -1,0 +1,32 @@
+Anya Avatar Redesign Notes - January 28, 2026
+==============================================
+
+CURRENT ISSUE:
+- Anya's current avatar only shows V-neck collar with minimal shoulder lines
+- Shoulders and clothing are incomplete/cut off
+- Face position needs to match Alma's positioning (face in center of circle)
+
+REFERENCE - ALMA'S AVATAR (good example):
+- Short pixie hair with texture lines
+- Hoop earrings
+- Warm friendly smile showing teeth
+- Neck visible with collar/top of shirt showing
+- Shoulder lines extend to edges of image
+- Face is centered in the frame
+- Bold, clear black lines
+
+ANYA'S DESIGN REQUIREMENTS:
+- Keep: Black hair bun (solid black fill)
+- Keep: V-neck top
+- Keep: Calm, serene expression (slight smile, no teeth)
+- Keep: East-West neutral appearance (not too Asian)
+- ADD: Complete shoulder lines extending to left and right edges
+- ADD: More of the V-neck top/chest area visible
+- ADJUST: Face should be more centered (not too high in frame)
+- STYLE: Bold black lines like Alma, not thin/faint lines
+
+COMPOSITION:
+- Head positioned so face is in center when placed in circular frame
+- Hair bun at top with small space above
+- Shoulders and upper chest visible at bottom
+- Similar proportions to Alma's avatar

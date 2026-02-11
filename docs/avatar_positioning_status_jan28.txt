@@ -1,0 +1,24 @@
+Avatar Positioning Status - January 28, 2026
+=============================================
+
+After CSS adjustments for per-avatar positioning:
+
+HOMEPAGE VIEW:
+- Andy: w-[110%] h-[110%] object-[center_25%] - moved down
+- Anya: w-[105%] h-[105%] object-[center_15%] - moved down slightly  
+- Alma: w-[95%] h-[95%] object-[center_10%] - zoomed out
+- Axel: w-[115%] h-[115%] object-[center_20%] - reference (unchanged)
+
+CHAT DIALOG VIEW:
+- Andy: w-[120%] h-[120%] object-[center_30%] - moved down more
+- Anya: w-[115%] h-[115%] object-[center_20%] - moved down
+- Alma: w-[100%] h-[100%] object-[center_15%] - zoomed out
+- Axel: w-[140%] h-[140%] object-[center_25%] - reference (unchanged)
+
+Need to verify:
+1. Homepage - all 4 avatars showing properly
+2. Chat dialog - hair not cut off for Andy/Anya
+3. Alma not too cramped in either view
+
+Current screenshot shows homepage with 4 avatars visible.
+Next step: Click on Andy to check chat dialog positioning.

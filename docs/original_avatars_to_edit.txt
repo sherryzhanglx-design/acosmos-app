@@ -1,0 +1,16 @@
+Original Avatars to Edit
+========================
+
+These are the original approved versions that need editing (NOT redesign):
+
+1. anya_final.png - Hair bun, V-neck, calm expression
+2. alma_final.png - Short pixie hair, hoop earrings, collar shirt, warm smile  
+3. axel_final.png - Glasses, slicked-back gray hair, beard, open collar (has gray fills)
+
+Required edits for all three:
+- Thicken all lines (make bolder)
+- Enlarge head portion
+- Reduce/crop clothing portion
+- Keep exact same character design
+
+Note: Axel has gray fills on hair and beard - user previously wanted pure B&W but we should keep the design and just adjust proportions.

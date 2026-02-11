@@ -1,0 +1,14 @@
+Anya Chat Page Status - January 28, 2026
+
+Background: Anya's unique purple-blue background (coach-bg-anya) is now active
+- Soft purple-blue gradient with nebula cloud effects
+- Creates calming atmosphere matching her Jupiter/grounding theme
+
+Avatar: New Anya avatar (anya_v11.png) is displayed correctly
+- Hair pulled back with low ponytail
+- V-neck cardigan with collar
+- Calm, serene expression with eyes looking at viewer
+- Small earrings
+- Complete shoulders visible
+
+Positioning: Avatar positioned same as Alma (w-[100%] h-[100%] object-[center_15%])

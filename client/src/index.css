@@ -1,0 +1,496 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* A.Cosmos cosmic theme - deep space with golden accents */
+  --color-gold: oklch(0.75 0.15 85);
+  --color-gold-light: oklch(0.85 0.12 85);
+  --color-gold-dark: oklch(0.55 0.15 85);
+  --color-amber: oklch(0.7 0.16 70);
+  --color-cosmos-blue: oklch(0.25 0.06 260);
+  --color-cosmos-deep: oklch(0.12 0.04 260);
+  --color-star-white: oklch(0.95 0.02 90);
+  --color-nebula-teal: oklch(0.45 0.1 200);
+  --color-nebula-purple: oklch(0.35 0.12 290);
+}
+
+/* A.Cosmos cosmic theme - deep space with golden accents */
+:root {
+  --primary: oklch(0.75 0.15 85); /* Golden */
+  --primary-foreground: oklch(0.12 0.04 260); /* Deep space */
+  --sidebar-primary: oklch(0.75 0.15 85);
+  --sidebar-primary-foreground: oklch(0.12 0.04 260);
+  --chart-1: oklch(0.75 0.15 85);
+  --chart-2: oklch(0.7 0.16 70);
+  --chart-3: oklch(0.45 0.1 200);
+  --chart-4: oklch(0.35 0.12 290);
+  --chart-5: oklch(0.55 0.15 85);
+  --radius: 0.75rem;
+  /* Deep cosmic background */
+  --background: oklch(0.08 0.03 260);
+  --foreground: oklch(0.95 0.02 90);
+  --card: oklch(0.12 0.04 260);
+  --card-foreground: oklch(0.95 0.02 90);
+  --popover: oklch(0.14 0.04 260);
+  --popover-foreground: oklch(0.95 0.02 90);
+  --secondary: oklch(0.18 0.04 260);
+  --secondary-foreground: oklch(0.85 0.02 90);
+  --muted: oklch(0.2 0.03 260);
+  --muted-foreground: oklch(0.6 0.03 260);
+  --accent: oklch(0.7 0.16 70); /* Amber accent */
+  --accent-foreground: oklch(0.12 0.04 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.04 260);
+  --input: oklch(0.16 0.04 260);
+  --ring: oklch(0.75 0.15 85);
+  --sidebar: oklch(0.1 0.04 260);
+  --sidebar-foreground: oklch(0.9 0.02 90);
+  --sidebar-accent: oklch(0.16 0.04 260);
+  --sidebar-accent-foreground: oklch(0.95 0.02 90);
+  --sidebar-border: oklch(0.22 0.04 260);
+  --sidebar-ring: oklch(0.75 0.15 85);
+}
+
+.dark {
+  --primary: oklch(0.75 0.15 85);
+  --primary-foreground: oklch(0.12 0.04 260);
+  --sidebar-primary: oklch(0.75 0.15 85);
+  --sidebar-primary-foreground: oklch(0.12 0.04 260);
+  --background: oklch(0.08 0.03 260);
+  --foreground: oklch(0.95 0.02 90);
+  --card: oklch(0.12 0.04 260);
+  --card-foreground: oklch(0.95 0.02 90);
+  --popover: oklch(0.14 0.04 260);
+  --popover-foreground: oklch(0.95 0.02 90);
+  --secondary: oklch(0.18 0.04 260);
+  --secondary-foreground: oklch(0.85 0.02 90);
+  --muted: oklch(0.2 0.03 260);
+  --muted-foreground: oklch(0.6 0.03 260);
+  --accent: oklch(0.7 0.16 70);
+  --accent-foreground: oklch(0.12 0.04 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.04 260);
+  --input: oklch(0.16 0.04 260);
+  --ring: oklch(0.75 0.15 85);
+  --chart-1: oklch(0.75 0.15 85);
+  --chart-2: oklch(0.7 0.16 70);
+  --chart-3: oklch(0.45 0.1 200);
+  --chart-4: oklch(0.35 0.12 290);
+  --chart-5: oklch(0.55 0.15 85);
+  --sidebar: oklch(0.1 0.04 260);
+  --sidebar-foreground: oklch(0.9 0.02 90);
+  --sidebar-accent: oklch(0.16 0.04 260);
+  --sidebar-accent-foreground: oklch(0.95 0.02 90);
+  --sidebar-border: oklch(0.22 0.04 260);
+  --sidebar-ring: oklch(0.75 0.15 85);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Cosmic starfield background - Dark blue night sky */
+  .cosmos-bg {
+    background: 
+      /* Twinkling stars */
+      radial-gradient(1px 1px at 20px 30px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 40px 70px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1px 1px at 50px 160px, oklch(0.85 0.02 90), transparent),
+      radial-gradient(1px 1px at 90px 40px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 130px 80px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1.5px 1.5px at 160px 120px, oklch(0.95 0.02 90), transparent),
+      /* Nebula glow effects */
+      radial-gradient(ellipse at 25% 85%, oklch(0.25 0.12 280 / 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 15%, oklch(0.3 0.1 220 / 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 60%, oklch(0.2 0.08 250 / 0.25) 0%, transparent 40%),
+      /* Dark blue night sky gradient */
+      linear-gradient(180deg, 
+        oklch(0.12 0.06 250) 0%,      /* Deep navy at top */
+        oklch(0.10 0.05 260) 30%,     /* Slightly lighter navy */
+        oklch(0.08 0.04 270) 60%,     /* Dark blue-purple */
+        oklch(0.06 0.03 280) 100%     /* Very dark blue at bottom */
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Animated stars layer */
+  .stars-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glowing accent borders */
+  .glow-gold {
+    box-shadow: 0 0 20px oklch(0.75 0.15 85 / 0.4), 0 0 40px oklch(0.75 0.15 85 / 0.15);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 20px oklch(0.7 0.16 70 / 0.4), 0 0 40px oklch(0.7 0.16 70 / 0.15);
+  }
+
+  /* Geometric accent line - golden */
+  .accent-line {
+    height: 2px;
+    background: linear-gradient(90deg, oklch(0.75 0.15 85), oklch(0.7 0.16 70));
+  }
+
+  /* Glass morphism card with cosmic feel */
+  .glass-card {
+    background: oklch(0.12 0.04 260 / 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid oklch(0.3 0.05 260 / 0.4);
+  }
+
+  /* Immersive chat container */
+  .chat-container {
+    background: oklch(0.1 0.04 260 / 0.92);
+    backdrop-filter: blur(30px);
+  }
+
+  /* Message bubble styles - golden theme */
+  .message-user {
+    background: linear-gradient(135deg, oklch(0.75 0.15 85 / 0.2), oklch(0.7 0.16 70 / 0.15));
+    border: 1px solid oklch(0.75 0.15 85 / 0.3);
+  }
+
+  .message-assistant {
+    background: oklch(0.14 0.04 260 / 0.85);
+    border: 1px solid oklch(0.25 0.04 260 / 0.5);
+  }
+
+  /* Golden text gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, oklch(0.85 0.12 85), oklch(0.75 0.15 85), oklch(0.7 0.16 70));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Nebula glow effect */
+  .nebula-glow {
+    position: relative;
+  }
+  .nebula-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, oklch(0.35 0.12 290 / 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Typing indicator animation */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .typing-dot {
+    animation: pulse-glow 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+
+  /* Cinematic background - base style */
+  .cinematic-bg {
+    background: 
+      /* Twinkling stars */
+      radial-gradient(1px 1px at 20px 30px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 40px 70px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1px 1px at 50px 160px, oklch(0.85 0.02 90), transparent),
+      radial-gradient(1px 1px at 90px 40px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 130px 80px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1.5px 1.5px at 160px 120px, oklch(0.95 0.02 90), transparent),
+      /* Nebula glow effects */
+      radial-gradient(ellipse at 25% 85%, oklch(0.25 0.12 280 / 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 15%, oklch(0.3 0.1 220 / 0.3) 0%, transparent 50%),
+      /* Dark blue night sky gradient */
+      linear-gradient(180deg, 
+        oklch(0.12 0.06 250) 0%,
+        oklch(0.10 0.05 260) 30%,
+        oklch(0.08 0.04 270) 60%,
+        oklch(0.06 0.03 280) 100%
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Andy - North Star: Deep blue with constellation lines */
+  .coach-bg-andy {
+    background: 
+      /* Stars */
+      radial-gradient(1px 1px at 20px 30px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 80px 60px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1.5px 1.5px at 150px 100px, oklch(0.95 0.02 90), transparent),
+      radial-gradient(1px 1px at 200px 40px, oklch(0.85 0.02 90), transparent),
+      /* Constellation-like subtle lines */
+      radial-gradient(ellipse at 30% 20%, oklch(0.35 0.08 240 / 0.25) 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 80%, oklch(0.3 0.1 230 / 0.2) 0%, transparent 35%),
+      /* Deep navy blue gradient - North Star theme */
+      linear-gradient(180deg, 
+        oklch(0.14 0.08 240) 0%,
+        oklch(0.11 0.07 245) 40%,
+        oklch(0.08 0.06 250) 100%
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Anya - Jupiter: Soft purple-blue with cloud/nebula effects */
+  .coach-bg-anya {
+    background: 
+      /* Stars */
+      radial-gradient(1px 1px at 30px 50px, oklch(0.9 0.02 90), transparent),
+      radial-gradient(1px 1px at 100px 80px, oklch(0.85 0.02 90), transparent),
+      radial-gradient(1.5px 1.5px at 180px 120px, oklch(0.9 0.02 90), transparent),
+      /* Soft nebula clouds - calming effect */
+      radial-gradient(ellipse at 20% 70%, oklch(0.28 0.1 280 / 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 30%, oklch(0.25 0.08 260 / 0.3) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, oklch(0.22 0.06 270 / 0.2) 0%, transparent 60%),
+      /* Purple-blue gradient - Jupiter/calm theme */
+      linear-gradient(180deg, 
+        oklch(0.13 0.07 275) 0%,
+        oklch(0.10 0.06 280) 50%,
+        oklch(0.07 0.05 285) 100%
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Alma - Venus: Warm rose-gold with soft glow */
+  .coach-bg-alma {
+    background: 
+      /* Stars with warmer tint */
+      radial-gradient(1px 1px at 25px 40px, oklch(0.92 0.04 60), transparent),
+      radial-gradient(1px 1px at 90px 70px, oklch(0.88 0.03 70), transparent),
+      radial-gradient(1.5px 1.5px at 160px 110px, oklch(0.9 0.04 55), transparent),
+      /* Warm rose-gold glow effects */
+      radial-gradient(ellipse at 25% 75%, oklch(0.35 0.12 30 / 0.25) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 25%, oklch(0.32 0.1 350 / 0.2) 0%, transparent 40%),
+      /* Warm coral to deep rose gradient - Venus/love theme */
+      linear-gradient(180deg, 
+        oklch(0.14 0.06 340) 0%,
+        oklch(0.11 0.05 350) 50%,
+        oklch(0.08 0.04 0) 100%
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Axel - Mirror: Silver-gray with geometric/prism effects */
+  .coach-bg-axel {
+    background: 
+      /* Stars with silver tint */
+      radial-gradient(1px 1px at 20px 35px, oklch(0.95 0.01 260), transparent),
+      radial-gradient(1px 1px at 85px 65px, oklch(0.9 0.01 250), transparent),
+      radial-gradient(1.5px 1.5px at 155px 105px, oklch(0.92 0.01 255), transparent),
+      /* Prism-like subtle reflections */
+      radial-gradient(ellipse at 30% 60%, oklch(0.3 0.06 220 / 0.2) 0%, transparent 35%),
+      radial-gradient(ellipse at 70% 40%, oklch(0.28 0.05 200 / 0.18) 0%, transparent 30%),
+      radial-gradient(ellipse at 50% 80%, oklch(0.25 0.04 240 / 0.15) 0%, transparent 40%),
+      /* Silver-gray to deep blue gradient - Mirror/reflection theme */
+      linear-gradient(180deg, 
+        oklch(0.16 0.03 230) 0%,
+        oklch(0.12 0.04 245) 50%,
+        oklch(0.08 0.05 260) 100%
+      );
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+
+/* PWA Mobile Optimizations */
+@layer components {
+  /* Safe area insets for notched devices */
+  .pwa-safe-area {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Prevent pull-to-refresh in PWA mode */
+  .pwa-no-overscroll {
+    overscroll-behavior: none;
+  }
+
+  /* Full height for PWA standalone mode */
+  .pwa-full-height {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Hide scrollbar in PWA for cleaner look */
+  .pwa-hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .pwa-hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Touch-friendly tap targets */
+  .pwa-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable text selection for app-like feel */
+  .pwa-no-select {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Enable text selection for content areas */
+  .pwa-allow-select {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Smooth momentum scrolling */
+  .pwa-smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* PWA standalone mode detection */
+  @media (display-mode: standalone) {
+    .pwa-standalone-only {
+      display: block;
+    }
+    .pwa-browser-only {
+      display: none;
+    }
+  }
+
+  @media not (display-mode: standalone) {
+    .pwa-standalone-only {
+      display: none;
+    }
+    .pwa-browser-only {
+      display: block;
+    }
+  }
+}
+
+/* Gold pulsing glow animation for hero section */
+@keyframes goldPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Prevent iOS bounce effect */
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS status bar area */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+  }
+}

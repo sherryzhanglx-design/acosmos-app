@@ -1,0 +1,1 @@
+ALTER TABLE `coaching_roles` ADD `avatar` varchar(512);

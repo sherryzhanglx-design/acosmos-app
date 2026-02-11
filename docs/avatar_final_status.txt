@@ -1,0 +1,22 @@
+Avatar Final Status - January 28, 2026
+======================================
+
+FIRST ROW AVATARS (Active Guardians):
+1. Andy - B&W line art, glasses, polo shirt, wavy hair - displays well in circular frame
+2. Anya - NEW v5: East-West neutral appearance, hair bun, V-neck, shoulder lines - face centered
+3. Alma - NEW v5: Short pixie hair, hoop earrings, collar shirt with shoulders - face centered
+4. Axel - NEW v4: Casual open-collar shirt, glasses, beard (line art), no suit - face centered
+
+CSS SETTINGS:
+- object-position: center 20%
+- size: 115%
+- This positions the face in the center with hair visible at top
+
+SECOND ROW (Coming Soon - still color):
+- Alan, Atlas, Amos, Annie - remain as color avatars (to be updated later)
+
+All first row avatars now display with:
+- Face centered in circular frame
+- Hair fully visible (not cut off at top)
+- Shoulders/clothing at bottom
+- Pure B&W line art style (no gray fills)

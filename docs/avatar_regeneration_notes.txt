@@ -1,0 +1,35 @@
+Avatar Regeneration Notes - January 27, 2026
+============================================
+
+CURRENT AVATARS REVIEWED:
+
+1. ANDY (andy.png) - REFERENCE FOR SHOULDER STYLE
+   - Wavy hair, glasses, polo shirt
+   - Has full shoulder lines extending to both sides
+   - Good amount of body/torso visible
+   - This is the reference for how shoulders should look
+
+2. ANYA (anya.png) - NEEDS MORE SHOULDER LINES
+   - Hair in bun (black filled), V-neck top
+   - Current issue: Only V-neck collar visible, no shoulder lines
+   - User request: Add more shoulder lines on left and right sides
+   - Keep: Hair bun, V-neck, calm expression, no glasses
+
+3. ALMA (alma.png) - NEEDS SHOULDER LINES ADDED
+   - Short pixie hair, hoop earrings, collared shirt
+   - Current issue: Only collar visible, no shoulder lines
+   - User request: Add shoulder lines (not just collar)
+   - Keep: Short hair, hoop earrings, warm smile, collar
+
+4. AXEL (axel.png) - NEEDS IMPROVED BEARD
+   - Slicked-back gray hair (with gray fill), glasses, beard (gray fill)
+   - Current issue: Beard looks odd/weird, gray fills
+   - User request: Improve beard, make it look more natural
+   - Need: Pure B&W line art, better beard design
+   - Keep: Glasses, slicked-back hair, suit jacket
+
+STYLE REQUIREMENTS:
+- Pure black line art on white background
+- No gray fills or shading
+- Shoulders should extend to sides like Andy's avatar
+- Head positioned so hair is fully visible at top

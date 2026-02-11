@@ -1,0 +1,362 @@
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, FileText, AlertTriangle, Mail } from "lucide-react";
+import { useLocation, Link } from "wouter";
+
+export default function Terms() {
+  const [, navigate] = useLocation();
+
+  return (
+    <div className="min-h-screen cosmos-bg">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-gradient-to-b from-black/60 to-transparent">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <Button
+            variant="ghost"
+            className="text-white/80 hover:text-amber-400 hover:bg-white/5"
+            onClick={() => navigate("/")}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
+          </Button>
+          
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663273647099/brjZCKejzRbtntrI.jpg" 
+              alt="A.Cosmos" 
+              className="w-8 h-8 rounded-lg object-cover"
+            />
+            <span className="text-lg font-semibold text-white">A.Cosmos</span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Content */}
+      <div className="pt-24 pb-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center">
+              <FileText className="w-8 h-8 text-amber-400" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Terms of Use</h1>
+            <p className="text-white/60">Last updated: January 17, 2026</p>
+          </div>
+
+          {/* Content Card */}
+          <div className="glass-card rounded-2xl p-8 md:p-12 space-y-8 text-white/80 leading-relaxed">
+            {/* Introduction */}
+            <section>
+              <p>
+                These Terms of Use ("Terms") constitute a legally binding agreement between you and LifeMaster 
+                Development LLC ("Company," "we," "our," or "us") governing your access to and use of A.Cosmos, 
+                including our mobile application and website (collectively, the "Service").
+              </p>
+            </section>
+
+            {/* Apple Acknowledgment */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">Apple Acknowledgment</h2>
+              <p className="mb-4">
+                You acknowledge that these Terms are between you and the Company only, and not with Apple Inc. ("Apple"). 
+                The Company, not Apple, is solely responsible for the Service and its content.
+              </p>
+              <p>
+                In the event of any conflict between these Terms and the Apple Media Services Terms and Conditions, 
+                the Apple terms shall prevail where applicable.
+              </p>
+            </section>
+
+            {/* 1. Nature of Service & AI Disclaimer */}
+            <section className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-red-400" />
+                1. Nature of the Service & AI Disclaimer
+              </h2>
+              <p className="mb-4">
+                A.Cosmos is an AI-powered self-reflection and life exploration tool designed to support personal insight, 
+                emotional awareness, and reflective dialogue.
+              </p>
+              
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Not Medical or Mental Health Services</h3>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                  <span>The Service does not provide medical, psychological, psychiatric, or therapeutic advice.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                  <span>The Service is not intended for diagnosis, treatment, cure, or prevention of any medical or mental health condition.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                  <span>All interactions are informational and educational in nature and intended solely for self-reflection and personal exploration.</span>
+                </li>
+              </ul>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">No Professional Relationship</h3>
+              <p className="mb-4">
+                Use of the Service does not create a therapist-patient, doctor-patient, counselor-client, or any other 
+                professional or fiduciary relationship.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">AI Limitations</h3>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                  <span>Responses are generated by artificial intelligence and may be inaccurate, incomplete, or unsuitable for your specific circumstances.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                  <span>You acknowledge the inherent limitations of AI systems and agree to use your own judgment when interpreting or acting on any information provided through the Service.</span>
+                </li>
+              </ul>
+            </section>
+
+            {/* 2. Safety, Crisis Awareness */}
+            <section className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">2. Safety, Crisis Awareness & External Support</h2>
+              <p className="mb-4 text-amber-200/90">
+                <strong>A.Cosmos is not designed for crisis intervention.</strong>
+              </p>
+              <p className="mb-4">
+                If you are experiencing acute emotional distress, thoughts of self-harm, suicidal ideation, or any emergency, 
+                do not rely on this Service. Seek immediate assistance from qualified professionals or emergency services.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Crisis Resources</h3>
+              <div className="bg-amber-500/10 rounded-lg p-4 space-y-2">
+                <p><strong className="text-white">Emergency Services (U.S.):</strong> 911</p>
+                <p><strong className="text-white">Suicide & Crisis Lifeline (U.S.):</strong> Call or text 988</p>
+                <p><strong className="text-white">Crisis Text Line:</strong> Text HOME to 741741</p>
+                <p><strong className="text-white">International Association for Suicide Prevention:</strong>{" "}
+                  <a href="https://www.iasp.info/resources/Crisis_Centres/" className="text-amber-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                    https://www.iasp.info/resources/Crisis_Centres/
+                  </a>
+                </p>
+              </div>
+              <p className="mt-4 text-sm">
+                The Service may, where appropriate, encourage users to seek external support or professional assistance; 
+                however, such encouragement does not constitute monitoring, supervision, or responsibility for user wellbeing.
+              </p>
+            </section>
+
+            {/* 3. Eligibility */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">3. Eligibility</h2>
+              <p className="mb-4">
+                You must be at least 18 years old to access or use the Service.
+              </p>
+              <p className="mb-4">By using the Service, you represent and warrant that:</p>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span>You are at least 18 years of age;</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span>You have the legal capacity to enter into these Terms; and</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span>You will comply with all applicable laws and regulations.</span>
+                </li>
+              </ul>
+            </section>
+
+            {/* 4. Acceptable Use & UGC */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">4. Acceptable Use & User-Generated Content (UGC)</h2>
+              <p className="mb-4">
+                You agree to use the Service only for lawful purposes and in accordance with these Terms.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">UGC Policy</h3>
+              <p className="mb-4">
+                You agree not to input, submit, or generate content that is illegal, harmful, abusive, threatening, harassing, 
+                or otherwise inappropriate, including but not limited to content that is offensive, insensitive, upsetting, 
+                intended to disgust, or in poor taste.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Moderation</h3>
+              <p className="mb-4">
+                We may employ automated systems and/or human review to monitor, filter, or remove content that violates 
+                these Terms or applicable safety standards.
+              </p>
+              <p className="mb-4">
+                We reserve the right to remove content and suspend or terminate accounts that violate these Terms or 
+                Apple's App Store Review Guidelines.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Reporting</h3>
+              <p>
+                You may report inappropriate AI-generated responses or technical issues through the "Contact Us" feature 
+                within the Service or by contacting us via email.
+              </p>
+            </section>
+
+            {/* 5. Subscriptions and In-App Purchases */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">5. Subscriptions and In-App Purchases</h2>
+              <p className="mb-4">
+                If you purchase a subscription or features through the Apple App Store ("In-App Purchase"):
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span><strong className="text-white">Billing:</strong> Payment will be charged to your Apple ID account at confirmation of purchase.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span><strong className="text-white">Auto-Renewal:</strong> Subscriptions automatically renew unless canceled at least 24 hours before the end of the current billing period. Your account will be charged for renewal within 24 hours prior to the end of the current period.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span><strong className="text-white">Management:</strong> You may manage or cancel subscriptions through your Apple ID account settings after purchase.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
+                  <span><strong className="text-white">Refunds:</strong> All refund requests for In-App Purchases are handled by Apple and are subject to Apple's refund policies.</span>
+                </li>
+              </ul>
+            </section>
+
+            {/* 6. Intellectual Property */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">6. Intellectual Property</h2>
+              <p className="mb-4">
+                The Service and all related content, software, design, text, graphics, and functionality are owned by 
+                LifeMaster Development LLC and protected by applicable intellectual property laws.
+              </p>
+              <p className="mb-4">
+                You may not copy, modify, distribute, reproduce, or create derivative works from the Service without 
+                prior written permission.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">User Content</h3>
+              <p>
+                You retain ownership of content you submit. By submitting content, you grant the Company a limited, 
+                non-exclusive license to store, process, and use such content solely for operating and improving the 
+                Service, in accordance with our Privacy Policy.
+              </p>
+            </section>
+
+            {/* 7. Disclaimer of Warranties */}
+            <section className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">7. Disclaimer of Warranties</h2>
+              <p className="uppercase text-sm">
+                THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, 
+                INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, OR NONINFRINGEMENT.
+              </p>
+              <p className="mt-4">
+                We do not warrant that the Service will be uninterrupted, error-free, secure, or meet your expectations.
+              </p>
+            </section>
+
+            {/* 8. Limitation of Liability */}
+            <section className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">8. Limitation of Liability</h2>
+              <p className="uppercase text-sm mb-4">
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, LIFEMASTER DEVELOPMENT LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, 
+                INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:
+              </p>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                  <span>Loss of profits, data, or goodwill;</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                  <span>Emotional distress or personal injury;</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                  <span>Reliance on AI-generated content;</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                  <span>Service interruptions or data loss.</span>
+                </li>
+              </ul>
+              <p className="text-sm text-white/60">
+                Certain jurisdictions may not allow some limitations, so portions of this section may not apply to you.
+              </p>
+            </section>
+
+            {/* 9. Termination */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">9. Termination</h2>
+              <p className="mb-4">
+                We may suspend or terminate your access to the Service at any time if you violate these Terms or pose 
+                a risk to the Service or others.
+              </p>
+              <p>
+                You may discontinue use of the Service at any time. Upon termination, your right to access the Service 
+                will immediately cease.
+              </p>
+            </section>
+
+            {/* 10. Apple-Specific Provisions */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">10. Apple-Specific Provisions</h2>
+              
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Maintenance and Support</h3>
+              <p className="mb-4">
+                LifeMaster Development LLC is solely responsible for providing maintenance and support services for the App. 
+                Apple has no obligation to furnish any maintenance or support services.
+              </p>
+
+              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Third-Party Beneficiary</h3>
+              <p>
+                You acknowledge and agree that Apple and its subsidiaries are third-party beneficiaries of these Terms 
+                and may enforce these Terms against you as a third-party beneficiary.
+              </p>
+            </section>
+
+            {/* 11. Governing Law */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">11. Governing Law</h2>
+              <p>
+                These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, 
+                United States, without regard to conflict of law principles.
+              </p>
+            </section>
+
+            {/* 12. Data Privacy */}
+            <section>
+              <h2 className="text-xl font-semibold text-white mb-4">12. Data Privacy</h2>
+              <p>
+                Your privacy is important to us. Our collection, use, and protection of personal information is governed 
+                by our <Link href="/privacy" className="text-amber-400 hover:underline">Privacy Policy</Link>, which is 
+                incorporated into these Terms by reference.
+              </p>
+            </section>
+
+            {/* 13. Contact Information */}
+            <section className="border-t border-white/10 pt-8">
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Mail className="w-5 h-5 text-amber-400" />
+                13. Contact Information
+              </h2>
+              <p className="mb-4">
+                If you have questions about these Terms, please contact us:
+              </p>
+              <div className="bg-white/5 rounded-xl p-4">
+                <p className="font-semibold text-white">LifeMaster Development LLC</p>
+                <p className="mt-2">
+                  Email: <a href="mailto:support@lifemaster.coach" className="text-amber-400 hover:underline">support@lifemaster.coach</a>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-8">
+        <div className="max-w-4xl mx-auto px-6 text-center text-white/40 text-sm">
+          <p>© 2026 LifeMaster Development LLC. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}

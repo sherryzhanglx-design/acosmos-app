@@ -1,0 +1,39 @@
+Avatar Positioning Analysis - January 28, 2026
+==============================================
+
+Looking at the source images:
+
+AXEL (reference - correct):
+- Head positioned in upper-center of image
+- Significant white space above head
+- Minimal clothing visible (just collar/shoulders)
+- Head fills about 60% of image height
+
+ANDY (needs adjustment):
+- Head positioned higher in image (less space above)
+- More clothing/body visible (polo shirt with shoulders)
+- Head fills about 45% of image height
+- ISSUE: When cropped in circle, hair gets cut off
+
+ANYA (needs adjustment):
+- Head positioned higher in image (hair bun at very top)
+- Less clothing visible but head still high
+- Head fills about 55% of image height
+- ISSUE: Hair bun gets cut off in circle
+
+ALMA (needs adjustment):
+- Head fills almost entire image (70%+)
+- Very little space above head
+- Minimal clothing visible
+- ISSUE: Image is too zoomed in, feels cramped
+
+SOLUTION:
+The issue is that the source images have different compositions.
+Rather than regenerating images, we can use CSS object-position 
+to adjust how each image is displayed in the circular frame.
+
+For Home.tsx and Chat.tsx:
+- Andy: object-position center 30% (move down more)
+- Anya: object-position center 25% (move down)
+- Alma: reduce scale from 115% to 100% (zoom out)
+- Axel: keep current settings (reference)
