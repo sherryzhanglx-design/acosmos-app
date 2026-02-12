@@ -7,8 +7,7 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
-import { storagePut } from "../storage";
-import { nanoid } from "nanoid";
+import { transcribeAudioBuffer } from "./voiceTranscription";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -36,21 +35,24 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   
-  // Audio upload endpoint for voice transcription
-  app.post("/api/upload-audio", express.raw({ type: "application/octet-stream", limit: "16mb" }), async (req, res) => {
+  // Voice transcription endpoint — receives raw audio, returns transcribed text
+  app.post("/api/transcribe", express.raw({ type: "application/octet-stream", limit: "25mb" }), async (req, res) => {
     try {
       const audioBuffer = req.body as Buffer;
       if (!audioBuffer || audioBuffer.length === 0) {
         return res.status(400).json({ error: "No audio data provided" });
       }
       
-      const fileName = `voice/${nanoid()}.webm`;
-      const { url } = await storagePut(fileName, audioBuffer, "audio/webm");
+      const result = await transcribeAudioBuffer(audioBuffer, "audio/webm");
       
-      res.json({ url });
+      if ('error' in result) {
+        return res.status(500).json({ error: result.error, details: result.details });
+      }
+      
+      res.json({ text: result.text });
     } catch (error) {
-      console.error("Audio upload failed:", error);
-      res.status(500).json({ error: "Failed to upload audio" });
+      console.error("Transcription failed:", error);
+      res.status(500).json({ error: "Failed to transcribe audio" });
     }
   });
   

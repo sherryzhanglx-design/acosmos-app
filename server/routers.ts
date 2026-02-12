@@ -39,7 +39,7 @@ import {
 } from "./db";
 import { invokeLLM } from "./_core/llm";
 import { shouldUseOpenAI, invokeOpenAI } from "./openai";
-import { transcribeAudio } from "./_core/voiceTranscription";
+// Voice transcription now uses direct REST endpoint in index.ts
 import { notifyOwner } from "./_core/notification";
 
 // Milestone thresholds for notifications
@@ -1731,18 +1731,11 @@ export const appRouter = router({
         };
       }),
     
-    // Transcribe voice input
+    // Voice transcription moved to REST endpoint /api/transcribe
     transcribe: protectedProcedure
       .input(z.object({ audioUrl: z.string() }))
-      .mutation(async ({ input }) => {
-        const result = await transcribeAudio({
-          audioUrl: input.audioUrl,
-          language: "en",
-        });
-        if ('error' in result) {
-          throw new Error(result.error);
-        }
-        return { text: result.text };
+      .mutation(async () => {
+        throw new Error("Voice transcription has moved to /api/transcribe endpoint");
       }),
   }),
 

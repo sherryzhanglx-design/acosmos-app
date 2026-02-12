@@ -58,7 +58,7 @@ export default function Chat() {
   
   const createConversation = trpc.conversations.create.useMutation();
   const sendMessage = trpc.chat.send.useMutation();
-  const transcribe = trpc.chat.transcribe.useMutation();
+  // Voice transcription uses direct REST endpoint /api/transcribe
   
   // Card history - persistent storage
   const { data: persistentCardHistory } = trpc.cardHistory.list.useQuery(
@@ -209,30 +209,24 @@ export default function Chat() {
         const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
         stream.getTracks().forEach(track => track.stop());
         
-        // Upload and transcribe
+        // Send audio directly to server for transcription (no S3 upload needed)
         try {
           setIsLoading(true);
           const arrayBuffer = await audioBlob.arrayBuffer();
-          const uint8Array = new Uint8Array(arrayBuffer);
           
-          // Upload to storage
-          const fileName = `voice-${Date.now()}.webm`;
-          const response = await fetch("/api/upload-audio", {
+          const response = await fetch("/api/transcribe", {
             method: "POST",
             headers: { "Content-Type": "application/octet-stream" },
-            body: uint8Array
+            body: new Uint8Array(arrayBuffer)
           });
           
           if (!response.ok) {
-            throw new Error("Failed to upload audio");
+            throw new Error("Transcription request failed");
           }
           
-          const { url } = await response.json();
-          
-          // Transcribe
-          const result = await transcribe.mutateAsync({ audioUrl: url });
-          if (result.text) {
-            handleSend(result.text, true);
+          const { text } = await response.json();
+          if (text) {
+            handleSend(text, true);
           }
         } catch (error) {
           console.error("Transcription failed:", error);
