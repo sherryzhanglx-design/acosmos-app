@@ -434,6 +434,8 @@ export default function Home() {
               </div>
             </>
           )}
+     </div>
+   </section>
 
       {/* Apex Module — Preserved for future update */}
       <section className="relative z-10 py-12 px-6">
