@@ -53,9 +53,9 @@ export async function textToSpeech(
         text: cleanText,
         model_id: "eleven_multilingual_v2",
         voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.75,
-          style: 0.0,
+          stability: 0.6,       // Higher = more stable, less harsh edges
+          similarity_boost: 0.6, // Lower = slightly softer, more natural warmth
+          style: 0.2,           // Higher = more expressive, adds emotional warmth
           use_speaker_boost: true,
         },
       }),
