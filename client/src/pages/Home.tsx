@@ -435,18 +435,6 @@ export default function Home() {
             </>
           )}
 
-          {/* Mobile App Announcement */}
-          <div className="mt-8 text-center space-y-2">
-            <p className="text-sm">
-              <span className="text-gold-gradient font-medium">📱 Our mobile app (A.Cosmos) is currently under review and will be available on the Apple App Store soon. Stay tuned!</span>
-            </p>
-            <p className="text-xs text-white/50">
-              💡 Want an app-like experience now? Add this site to your home screen — <button onClick={() => navigate('/support')} className="text-amber-400/80 hover:text-amber-400 underline">Learn how</button>
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Apex Module — Preserved for future update */}
       <section className="relative z-10 py-12 px-6">
         <div className="max-w-3xl mx-auto">
