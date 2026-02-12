@@ -6,7 +6,7 @@ import { useLocation, useParams } from "wouter";
 import { useState, useRef, useEffect } from "react";
 import { 
   Briefcase, Crown, Heart, Leaf, Sparkles, Compass,
-  Send, Mic, MicOff, ArrowLeft, MoreVertical, Loader2,
+  Send, Mic, ArrowLeft, MoreVertical, Loader2,
   History, X,
   type LucideIcon
 } from "lucide-react";
@@ -551,14 +551,21 @@ export default function Chat() {
             <button
               onClick={isRecording ? stopRecording : startRecording}
               disabled={isLoading && !isRecording}
-              className={`flex-shrink-0 p-3 rounded-xl transition-all duration-300 ${
+              className={`relative flex-shrink-0 p-3 rounded-xl transition-all duration-300 ${
                 isRecording 
-                  ? "bg-red-500/20 text-red-400 glow-orange animate-pulse" 
+                  ? "bg-red-500/20 text-red-400 ring-2 ring-red-500/50 animate-pulse" 
                   : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
               }`}
+              title={isRecording ? "Tap to stop recording" : "Tap to start recording"}
             >
-              {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+              <Mic className="w-5 h-5" />
+              {isRecording && (
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
+              )}
             </button>
+            {isRecording && (
+              <span className="text-red-400 text-xs animate-pulse self-center">Recording...</span>
+            )}
 
             {/* Draw Card Button - Only for Anya (anxiety) */}
             {selectedRole?.slug === "anxiety" && (
