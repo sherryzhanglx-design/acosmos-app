@@ -39,7 +39,7 @@ export default function Privacy() {
               <Shield className="w-8 h-8 text-amber-400" />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Privacy Policy</h1>
-            <p className="text-white/60">Last updated: January 17, 2026</p>
+            <p className="text-white/60">Last updated: February 11, 2026</p>
           </div>
 
           {/* Content Card */}
@@ -54,7 +54,7 @@ export default function Privacy() {
               </p>
               <p>
                 This Privacy Policy explains how we collect, use, store, and protect your information when you use 
-                our mobile application and website (collectively, the "Service"). We are committed to handling 
+                our website and web application (collectively, the "Service"). We are committed to handling 
                 personal information responsibly and transparently.
               </p>
             </section>
@@ -174,7 +174,7 @@ export default function Privacy() {
               </p>
               <p className="mb-4">
                 You can initiate permanent deletion of your account and associated conversation history directly 
-                within the App settings. Once deletion is completed, your data cannot be recovered.
+                within your account settings. Once deletion is completed, your data cannot be recovered.
               </p>
               <p>
                 Certain information may be retained for a limited period if required to comply with legal obligations, 

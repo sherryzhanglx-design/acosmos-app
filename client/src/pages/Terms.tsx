@@ -39,7 +39,7 @@ export default function Terms() {
               <FileText className="w-8 h-8 text-amber-400" />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Terms of Use</h1>
-            <p className="text-white/60">Last updated: January 17, 2026</p>
+            <p className="text-white/60">Last updated: February 11, 2026</p>
           </div>
 
           {/* Content Card */}
@@ -49,20 +49,7 @@ export default function Terms() {
               <p>
                 These Terms of Use ("Terms") constitute a legally binding agreement between you and LifeMaster 
                 Development LLC ("Company," "we," "our," or "us") governing your access to and use of A.Cosmos, 
-                including our mobile application and website (collectively, the "Service").
-              </p>
-            </section>
-
-            {/* Apple Acknowledgment */}
-            <section>
-              <h2 className="text-xl font-semibold text-white mb-4">Apple Acknowledgment</h2>
-              <p className="mb-4">
-                You acknowledge that these Terms are between you and the Company only, and not with Apple Inc. ("Apple"). 
-                The Company, not Apple, is solely responsible for the Service and its content.
-              </p>
-              <p>
-                In the event of any conflict between these Terms and the Apple Media Services Terms and Conditions, 
-                the Apple terms shall prevail where applicable.
+                including our website and web application (collectively, the "Service").
               </p>
             </section>
 
@@ -184,7 +171,7 @@ export default function Terms() {
               </p>
               <p className="mb-4">
                 We reserve the right to remove content and suspend or terminate accounts that violate these Terms or 
-                Apple's App Store Review Guidelines.
+                our community standards.
               </p>
 
               <h3 className="text-lg font-semibold text-white mt-6 mb-3">Reporting</h3>
@@ -194,16 +181,16 @@ export default function Terms() {
               </p>
             </section>
 
-            {/* 5. Subscriptions and In-App Purchases */}
+            {/* 5. Subscriptions and Payments */}
             <section>
-              <h2 className="text-xl font-semibold text-white mb-4">5. Subscriptions and In-App Purchases</h2>
+              <h2 className="text-xl font-semibold text-white mb-4">5. Subscriptions and Payments</h2>
               <p className="mb-4">
-                If you purchase a subscription or features through the Apple App Store ("In-App Purchase"):
+                If you purchase a subscription or premium features:
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
-                  <span><strong className="text-white">Billing:</strong> Payment will be charged to your Apple ID account at confirmation of purchase.</span>
+                  <span><strong className="text-white">Billing:</strong> Payment will be processed through our secure payment provider at confirmation of purchase.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
@@ -211,11 +198,11 @@ export default function Terms() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
-                  <span><strong className="text-white">Management:</strong> You may manage or cancel subscriptions through your Apple ID account settings after purchase.</span>
+                  <span><strong className="text-white">Management:</strong> You may manage or cancel subscriptions through your account settings or by contacting our support team.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
-                  <span><strong className="text-white">Refunds:</strong> All refund requests for In-App Purchases are handled by Apple and are subject to Apple's refund policies.</span>
+                  <span><strong className="text-white">Refunds:</strong> Refund requests are handled in accordance with our refund policy. Please contact support@lifemaster.coach for assistance.</span>
                 </li>
               </ul>
             </section>
@@ -295,35 +282,18 @@ export default function Terms() {
               </p>
             </section>
 
-            {/* 10. Apple-Specific Provisions */}
+            {/* 10. Governing Law */}
             <section>
-              <h2 className="text-xl font-semibold text-white mb-4">10. Apple-Specific Provisions</h2>
-              
-              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Maintenance and Support</h3>
-              <p className="mb-4">
-                LifeMaster Development LLC is solely responsible for providing maintenance and support services for the App. 
-                Apple has no obligation to furnish any maintenance or support services.
-              </p>
-
-              <h3 className="text-lg font-semibold text-white mt-6 mb-3">Third-Party Beneficiary</h3>
-              <p>
-                You acknowledge and agree that Apple and its subsidiaries are third-party beneficiaries of these Terms 
-                and may enforce these Terms against you as a third-party beneficiary.
-              </p>
-            </section>
-
-            {/* 11. Governing Law */}
-            <section>
-              <h2 className="text-xl font-semibold text-white mb-4">11. Governing Law</h2>
+              <h2 className="text-xl font-semibold text-white mb-4">10. Governing Law</h2>
               <p>
                 These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, 
                 United States, without regard to conflict of law principles.
               </p>
             </section>
 
-            {/* 12. Data Privacy */}
+            {/* 11. Data Privacy */}
             <section>
-              <h2 className="text-xl font-semibold text-white mb-4">12. Data Privacy</h2>
+              <h2 className="text-xl font-semibold text-white mb-4">11. Data Privacy</h2>
               <p>
                 Your privacy is important to us. Our collection, use, and protection of personal information is governed 
                 by our <Link href="/privacy" className="text-amber-400 hover:underline">Privacy Policy</Link>, which is 
@@ -331,11 +301,11 @@ export default function Terms() {
               </p>
             </section>
 
-            {/* 13. Contact Information */}
+            {/* 12. Contact Information */}
             <section className="border-t border-white/10 pt-8">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <Mail className="w-5 h-5 text-amber-400" />
-                13. Contact Information
+                12. Contact Information
               </h2>
               <p className="mb-4">
                 If you have questions about these Terms, please contact us:

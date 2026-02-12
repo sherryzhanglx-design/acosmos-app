@@ -39,7 +39,7 @@ export default function PurchaseTerms() {
               <CreditCard className="w-8 h-8 text-amber-400" />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Purchase & Subscription Terms</h1>
-            <p className="text-white/60">Version 1.0 · Last updated: January 2026</p>
+            <p className="text-white/60">Version 1.0 · Last updated: February 2026</p>
           </div>
 
           {/* Content Card */}
@@ -48,7 +48,7 @@ export default function PurchaseTerms() {
             <section>
               <p className="mb-4">
                 These Purchase & Subscription Terms ("Purchase Terms") govern all paid features, subscriptions, 
-                and in-app purchases offered through the A.Cosmos mobile application and related services 
+                and purchases offered through the A.Cosmos web application and related services 
                 (collectively, the "Service").
               </p>
               <p>
@@ -72,40 +72,40 @@ export default function PurchaseTerms() {
               </p>
               <p className="mb-4">
                 The specific features, pricing, and subscription options available to you will be displayed clearly 
-                within the App at the time of purchase.
+                within the Service at the time of purchase.
               </p>
               <p>
-                Prices may vary by region and are subject to change at any time. All prices shown in the App include 
+                Prices may vary by region and are subject to change at any time. All prices shown include 
                 applicable taxes unless otherwise stated.
               </p>
             </section>
 
-            {/* 2. In-App Purchases via Apple */}
+            {/* 2. Payment Processing */}
             <section className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-              <h2 className="text-xl font-semibold text-white mb-4">2. In-App Purchases via Apple</h2>
+              <h2 className="text-xl font-semibold text-white mb-4">2. Payment Processing</h2>
               <p className="mb-4">
-                All payments for A.Cosmos subscriptions and paid features are processed exclusively through 
-                Apple's In-App Purchase system.
+                All payments for A.Cosmos subscriptions and paid features are processed through our secure 
+                third-party payment provider.
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                  <span>Apple handles all payment processing and billing.</span>
+                  <span>Our payment provider handles all payment processing and billing securely.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                  <span>We do not collect, store, or have access to your payment card details.</span>
+                  <span>We do not store your complete payment card details on our servers.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
                   <span>
-                    Apple may share limited transaction information with us (such as purchase confirmation and 
+                    We receive limited transaction information (such as purchase confirmation and 
                     subscription status) solely to enable access to paid features.
                   </span>
                 </li>
               </ul>
               <p className="mt-4 text-sm text-white/60">
-                Your purchase is also subject to Apple's Media Services Terms and Conditions and Apple's Privacy Policy.
+                Your payment information is handled in accordance with industry-standard security practices and our Privacy Policy.
               </p>
             </section>
 
@@ -124,7 +124,7 @@ export default function PurchaseTerms() {
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
                   <span>
-                    Renewal charges will be applied to your Apple ID account within 24 hours prior to the end 
+                    Renewal charges will be applied to your payment method within 24 hours prior to the end 
                     of the current subscription period.
                   </span>
                 </li>
@@ -141,21 +141,21 @@ export default function PurchaseTerms() {
             <section className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
               <h2 className="text-xl font-semibold text-white mb-4">4. Managing and Canceling Subscriptions</h2>
               <p className="mb-4">
-                You can manage or cancel your subscription at any time through your Apple ID account settings:
+                You can manage or cancel your subscription at any time through your account settings within the Service.
               </p>
               <div className="bg-black/20 rounded-lg p-4 mb-4">
-                <p className="text-white font-medium">Apple ID → Subscriptions</p>
+                <p className="text-white font-medium">Account Settings → Subscription Management</p>
               </div>
               <p className="mb-2"><strong className="text-white">Please note:</strong></p>
               <ul className="space-y-2">
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
-                  <span>Deleting the App does not cancel your subscription.</span>
+                  <span>Canceling your subscription will prevent future billing but will not refund the current billing period.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
                   <span>
-                    Subscription management must be completed through Apple; we cannot cancel subscriptions on your behalf.
+                    You will retain access to paid features until the end of your current billing period after cancellation.
                   </span>
                 </li>
               </ul>
@@ -174,13 +174,13 @@ export default function PurchaseTerms() {
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
                   <span>
                     Unless canceled before the trial ends, your subscription will automatically convert to a paid 
-                    subscription and be charged to your Apple ID account.
+                    subscription and your payment method will be charged.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 flex-shrink-0" />
                   <span>
-                    Each Apple ID is typically eligible for one free trial per subscription offering, subject to Apple's policies.
+                    Each user account is typically eligible for one free trial per subscription offering.
                   </span>
                 </li>
               </ul>
@@ -190,22 +190,27 @@ export default function PurchaseTerms() {
             <section>
               <h2 className="text-xl font-semibold text-white mb-4">6. Refunds</h2>
               <p className="mb-4">
-                All refund requests are handled by Apple in accordance with Apple's refund policies.
+                Refund requests are handled on a case-by-case basis in accordance with our refund policy.
               </p>
               <p className="mb-4">
-                <strong className="text-white">We do not issue refunds directly.</strong>
+                To request a refund, please contact our support team with your purchase details and reason for the request.
               </p>
-              <p className="mb-4">To request a refund, please visit:</p>
-              <a 
-                href="https://support.apple.com/billing" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-white/10 rounded-lg text-amber-400 hover:bg-white/20 transition-colors"
-              >
-                https://support.apple.com/billing
-              </a>
+              <p className="mb-4">
+                <strong className="text-white">Contact for refund requests:</strong>
+              </p>
+              <div className="bg-white/10 rounded-lg p-4">
+                <p>
+                  Email:{" "}
+                  <a 
+                    href="mailto:support@lifemaster.coach" 
+                    className="text-amber-400 hover:underline"
+                  >
+                    support@lifemaster.coach
+                  </a>
+                </p>
+              </div>
               <p className="mt-4 text-sm text-white/60">
-                Approval of refunds is at Apple's sole discretion.
+                Refund decisions are made at our discretion and typically processed within 5-10 business days if approved.
               </p>
             </section>
 
@@ -216,8 +221,8 @@ export default function PurchaseTerms() {
                 We reserve the right to update pricing or subscription offerings at any time.
               </p>
               <p className="mb-4">
-                If changes affect an existing subscription, Apple will notify you in advance where required by 
-                applicable policies or law.
+                If changes affect an existing subscription, we will notify you in advance via email or through 
+                the Service where required by applicable law.
               </p>
               <p>
                 Continued use of the subscription after such changes constitutes acceptance of the updated pricing or terms.
@@ -245,7 +250,7 @@ export default function PurchaseTerms() {
                 </p>
               </div>
               <p className="text-sm text-white/60">
-                For billing, payment, or refund issues, please contact Apple Support directly.
+                We aim to respond to all inquiries within 1-2 business days.
               </p>
             </section>
 
