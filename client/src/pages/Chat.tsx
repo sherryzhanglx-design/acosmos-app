@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { useLocation, useParams } from "wouter";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { 
   Briefcase, Crown, Heart, Leaf, Sparkles, Compass,
   Send, Mic, ArrowLeft, MoreVertical, Loader2,
-  History, X,
+  History, X, Volume2, Square, Loader,
   type LucideIcon
 } from "lucide-react";
 import { Streamdown } from "streamdown";
@@ -44,6 +44,12 @@ export default function Chat() {
   const [selectedHistoryCard, setSelectedHistoryCard] = useState<ReflectionCardData | null>(null);
   const [showPhaseClosureNotice, setShowPhaseClosureNotice] = useState(false);
   const [phaseClosureShownThisSession, setPhaseClosureShownThisSession] = useState(false);
+  
+  // TTS state
+  const [playingMessageId, setPlayingMessageId] = useState<number | null>(null);
+  const [loadingTTSMessageId, setLoadingTTSMessageId] = useState<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -256,6 +262,91 @@ export default function Chat() {
       handleSend(input);
     }
   };
+
+  // TTS: Check if current guardian has voice enabled
+  const isTTSAvailable = selectedRole?.slug === "transformation"; // Axel only for now
+
+  // TTS: Play or stop audio for a message
+  const handlePlayTTS = useCallback(async (messageId: number, text: string) => {
+    // If already playing this message, stop it
+    if (playingMessageId === messageId) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setPlayingMessageId(null);
+      return;
+    }
+
+    // Stop any currently playing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current);
+      audioUrlRef.current = null;
+    }
+
+    setLoadingTTSMessageId(messageId);
+    setPlayingMessageId(null);
+
+    try {
+      const response = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text,
+          guardianSlug: selectedRole?.slug,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("TTS request failed");
+      }
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      audioUrlRef.current = audioUrl;
+
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.onended = () => {
+        setPlayingMessageId(null);
+        if (audioUrlRef.current) {
+          URL.revokeObjectURL(audioUrlRef.current);
+          audioUrlRef.current = null;
+        }
+      };
+
+      audio.onerror = () => {
+        setPlayingMessageId(null);
+        toast.error("Audio playback failed");
+      };
+
+      setLoadingTTSMessageId(null);
+      setPlayingMessageId(messageId);
+      await audio.play();
+    } catch (error) {
+      console.error("TTS failed:", error);
+      toast.error("Voice playback is not available right now");
+      setLoadingTTSMessageId(null);
+      setPlayingMessageId(null);
+    }
+  }, [playingMessageId, selectedRole?.slug]);
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+      }
+    };
+  }, []);
 
   // Handle reflection card selection (Anya only)
   const handleCardReflect = (card: ReflectionCardData) => {
@@ -508,6 +599,40 @@ export default function Chat() {
                     message.content
                   )}
                 </div>
+                {/* TTS Play Button - Only for assistant messages when TTS is available */}
+                {message.role === "assistant" && isTTSAvailable && (
+                  <div className="flex items-center mt-2 pt-2 border-t border-white/5">
+                    <button
+                      onClick={() => handlePlayTTS(message.id, message.content)}
+                      disabled={loadingTTSMessageId === message.id}
+                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs transition-all duration-200 ${
+                        playingMessageId === message.id
+                          ? "bg-amber-500/20 text-amber-400"
+                          : loadingTTSMessageId === message.id
+                          ? "bg-white/5 text-white/40 cursor-wait"
+                          : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70"
+                      }`}
+                      title={playingMessageId === message.id ? "Stop playback" : "Listen to response"}
+                    >
+                      {loadingTTSMessageId === message.id ? (
+                        <>
+                          <Loader className="w-3 h-3 animate-spin" />
+                          <span>Loading...</span>
+                        </>
+                      ) : playingMessageId === message.id ? (
+                        <>
+                          <Square className="w-3 h-3" />
+                          <span>Stop</span>
+                        </>
+                      ) : (
+                        <>
+                          <Volume2 className="w-3 h-3" />
+                          <span>Listen</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}

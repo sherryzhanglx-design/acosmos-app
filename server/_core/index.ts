@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { transcribeAudioBuffer } from "./voiceTranscription";
+import { textToSpeech, isTTSEnabled } from "./tts";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -56,6 +57,33 @@ async function startServer() {
     }
   });
   
+  // Text-to-Speech endpoint — converts text to audio using ElevenLabs
+  app.post("/api/tts", express.json({ limit: "1mb" }), async (req, res) => {
+    try {
+      const { text, guardianSlug } = req.body;
+      
+      if (!text || !guardianSlug) {
+        return res.status(400).json({ error: "Missing text or guardianSlug" });
+      }
+      
+      if (!isTTSEnabled(guardianSlug)) {
+        return res.status(400).json({ error: "TTS not available for this guardian" });
+      }
+      
+      const audioBuffer = await textToSpeech(text, guardianSlug);
+      
+      res.set({
+        "Content-Type": "audio/mpeg",
+        "Content-Length": audioBuffer.length.toString(),
+        "Cache-Control": "public, max-age=3600",
+      });
+      res.send(audioBuffer);
+    } catch (error) {
+      console.error("[TTS] Failed:", error);
+      res.status(500).json({ error: "Failed to generate speech" });
+    }
+  });
+
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // tRPC API
