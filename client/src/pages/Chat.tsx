@@ -320,9 +320,13 @@ export default function Chat() {
         }
       };
 
-      audio.onerror = () => {
-        setPlayingMessageId(null);
-        toast.error("Audio playback failed");
+      audio.onerror = (e) => {
+        // Only show error if we're not already playing successfully
+        // Some browsers fire a transient error during loading that resolves on its own
+        if (audioRef.current?.paused && !audioRef.current?.ended) {
+          setPlayingMessageId(null);
+          setLoadingTTSMessageId(null);
+        }
       };
 
       setLoadingTTSMessageId(null);
