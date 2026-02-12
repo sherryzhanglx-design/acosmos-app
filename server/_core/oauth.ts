@@ -1,9 +1,13 @@
 /**
- * Google OAuth 2.0 Routes
+ * Authentication Routes
  *
- * Two endpoints:
- *   GET /api/oauth/google    — Redirect user to Google's consent screen
- *   GET /api/oauth/callback  — Handle the authorization code callback
+ * Google OAuth 2.0:
+ *   GET  /api/oauth/google              — Redirect user to Google's consent screen
+ *   GET  /api/oauth/callback            — Handle the authorization code callback
+ *
+ * Magic Link (email):
+ *   POST /api/auth/magic-link/send      — Send a magic link email
+ *   GET  /api/auth/magic-link/verify    — Verify token and create session
  */
 
 import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
@@ -12,6 +16,7 @@ import * as db from "../db";
 import { getSessionCookieOptions } from "./cookies";
 import { ENV } from "./env";
 import { sdk } from "./sdk";
+import { magicLink } from "./magicLink";
 
 function getQueryParam(req: Request, key: string): string | undefined {
   const value = req.query[key];
@@ -38,6 +43,123 @@ export function registerOAuthRoutes(app: Express) {
     console.log("[OAuth] Redirecting to Google. Callback URL:", callbackUrl);
     res.redirect(302, authUrl);
   });
+
+  // ─── Magic Link Routes ──────────────────────────────────────────────────
+
+  /**
+   * POST /api/auth/magic-link/send
+   *
+   * Accepts { email } in the request body, generates a signed token,
+   * and sends a magic link email via Resend.
+   */
+  app.post("/api/auth/magic-link/send", async (req: Request, res: Response) => {
+    const { email } = req.body as { email?: string };
+
+    if (!email || typeof email !== "string") {
+      res.status(400).json({ error: "Email is required" });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      res.status(400).json({ error: "Invalid email address" });
+      return;
+    }
+
+    if (!ENV.resendApiKey) {
+      console.error("[MagicLink] RESEND_API_KEY not configured");
+      res.status(500).json({ error: "Email service not configured" });
+      return;
+    }
+
+    try {
+      const token = await magicLink.generateToken(email);
+
+      // Build base URL
+      let baseUrl = ENV.publicUrl;
+      if (!baseUrl) {
+        const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
+        const host = req.headers["x-forwarded-host"] || req.headers.host;
+        baseUrl = `${protocol}://${host}`;
+      }
+
+      const magicLinkUrl = magicLink.buildMagicLinkUrl(baseUrl, token);
+      await magicLink.sendEmail(email, magicLinkUrl);
+
+      console.log("[MagicLink] Magic link sent to:", email);
+      res.json({ success: true });
+    } catch (err) {
+      console.error("[MagicLink] Failed to send:", err);
+      res.status(500).json({ error: "Failed to send magic link. Please try again." });
+    }
+  });
+
+  /**
+   * GET /api/auth/magic-link/verify
+   *
+   * Verifies the magic link token, creates/updates the user,
+   * issues a session cookie, and redirects to the app.
+   */
+  app.get("/api/auth/magic-link/verify", async (req: Request, res: Response) => {
+    const token = getQueryParam(req, "token");
+
+    if (!token) {
+      res.redirect(302, "/login?error=missing_token");
+      return;
+    }
+
+    try {
+      const email = await magicLink.verifyToken(token);
+
+      if (!email) {
+        res.redirect(302, "/login?error=invalid_token");
+        return;
+      }
+
+      console.log("[MagicLink] Token verified for:", email);
+
+      // Use email as the unique identifier (prefixed to distinguish from Google sub)
+      const openId = `email:${email}`;
+
+      // Create or update user
+      const { isNewUser } = await db.upsertUser({
+        openId,
+        name: email.split("@")[0],  // Use local part as default name
+        email,
+        loginMethod: "magic_link",
+        lastSignedIn: new Date(),
+      });
+
+      if (isNewUser) {
+        console.log("[MagicLink] New user registered:", email);
+        const totalUsers = await db.getTotalUserCount();
+        console.log(`[MagicLink] Total users: ${totalUsers}`);
+      }
+
+      // Create session JWT
+      const sessionToken = await sdk.session.createToken({
+        sub: openId,
+        name: email.split("@")[0],
+        email,
+      });
+
+      // Set session cookie and redirect
+      const cookieOptions = getSessionCookieOptions(req);
+      res.cookie(COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: ONE_YEAR_MS,
+      });
+
+      console.log("[MagicLink] Login successful for:", email);
+      res.redirect(302, "/");
+    } catch (err) {
+      console.error("[MagicLink] Verification failed:", err);
+      res.redirect(302, "/login?error=magic_link_failed");
+    }
+  });
+
+  // ─── Google OAuth Routes ────────────────────────────────────────────────
 
   /**
    * GET /api/oauth/callback

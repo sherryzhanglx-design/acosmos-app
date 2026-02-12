@@ -14,6 +14,9 @@ export const ENV = {
   // OpenAI API — primary AI provider
   openaiApiKey: process.env.OPENAI_API_KEY ?? process.env.OpenAIAPIKey4Manus ?? "",
 
+  // Resend (Magic Link email)
+  resendApiKey: process.env.RESEND_API_KEY ?? "",
+
   // Public URL for OAuth redirect (auto-detected if not set)
   publicUrl: process.env.PUBLIC_URL ?? "",
 

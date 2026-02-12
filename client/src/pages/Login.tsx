@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useSearch } from "wouter";
 
 /**
@@ -26,12 +27,33 @@ function GoogleLogo({ className = "w-5 h-5" }: { className?: string }) {
   );
 }
 
+/**
+ * Email icon for the magic link input.
+ */
+function EmailIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+      />
+    </svg>
+  );
+}
+
 const ERROR_MESSAGES: Record<string, string> = {
   google_denied: "You cancelled the sign-in. Feel free to try again when you're ready.",
   missing_code: "Something went wrong during sign-in. Please try again.",
   invalid_user: "Could not verify your Google account. Please try again.",
   callback_failed: "Sign-in failed due to a server error. Please try again later.",
+  missing_token: "The sign-in link is invalid. Please request a new one.",
+  invalid_token: "This sign-in link has expired or already been used. Please request a new one.",
+  magic_link_failed: "Sign-in failed. Please request a new link and try again.",
 };
+
+type MagicLinkState = "idle" | "sending" | "sent" | "error";
 
 export default function Login() {
   const [, navigate] = useLocation();
@@ -40,10 +62,44 @@ export default function Login() {
   const errorCode = params.get("error");
   const errorMessage = errorCode ? ERROR_MESSAGES[errorCode] || "An unexpected error occurred." : null;
 
+  // Magic Link state
+  const [email, setEmail] = useState("");
+  const [magicLinkState, setMagicLinkState] = useState<MagicLinkState>("idle");
+  const [magicLinkError, setMagicLinkError] = useState<string | null>(null);
+
   const handleGoogleLogin = () => {
-    // Redirect to our backend endpoint which initiates the Google OAuth flow
     const returnTo = params.get("returnTo") || "/";
     window.location.href = `/api/oauth/google?returnTo=${encodeURIComponent(returnTo)}`;
+  };
+
+  const handleMagicLink = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email.trim()) return;
+
+    setMagicLinkState("sending");
+    setMagicLinkError(null);
+
+    try {
+      const response = await fetch("/api/auth/magic-link/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send magic link");
+      }
+
+      setMagicLinkState("sent");
+    } catch (err) {
+      setMagicLinkState("error");
+      setMagicLinkError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -83,7 +139,7 @@ export default function Login() {
             </p>
           </div>
 
-          {/* Error Message */}
+          {/* Error Message (from URL params) */}
           {errorMessage && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-red-300 text-sm">
               {errorMessage}
@@ -98,6 +154,88 @@ export default function Login() {
             <GoogleLogo />
             <span>Continue with Google</span>
           </button>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-gray-500 text-xs uppercase tracking-wider">or</span>
+            <div className="flex-1 h-px bg-white/10" />
+          </div>
+
+          {/* Magic Link Form */}
+          {magicLinkState === "sent" ? (
+            /* Success state — email sent */
+            <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-5 space-y-3">
+              <div className="w-10 h-10 mx-auto rounded-full bg-indigo-500/20 flex items-center justify-center">
+                <EmailIcon className="w-5 h-5 text-indigo-400" />
+              </div>
+              <p className="text-indigo-200 text-sm font-medium">
+                Check your email
+              </p>
+              <p className="text-gray-400 text-xs leading-relaxed">
+                We sent a sign-in link to <span className="text-white/80">{email}</span>.
+                Click the link in the email to continue.
+              </p>
+              <button
+                onClick={() => {
+                  setMagicLinkState("idle");
+                  setEmail("");
+                }}
+                className="text-indigo-400 hover:text-indigo-300 text-xs underline underline-offset-2 transition-colors"
+              >
+                Use a different email
+              </button>
+            </div>
+          ) : (
+            /* Email input form */
+            <form onSubmit={handleMagicLink} className="space-y-3">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <EmailIcon className="w-4 h-4 text-gray-500" />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (magicLinkState === "error") {
+                      setMagicLinkState("idle");
+                      setMagicLinkError(null);
+                    }
+                  }}
+                  placeholder="Enter your email address"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30 transition-all"
+                  disabled={magicLinkState === "sending"}
+                  required
+                />
+              </div>
+
+              {/* Magic Link Error */}
+              {magicLinkError && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-red-300 text-xs">
+                  {magicLinkError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={magicLinkState === "sending" || !email.trim()}
+                className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-600/50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-200"
+              >
+                {magicLinkState === "sending" ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    <span>Sending link...</span>
+                  </>
+                ) : (
+                  <span>Continue with Email</span>
+                )}
+              </button>
+            </form>
+          )}
 
           <div className="border-t border-white/10 pt-4">
             <p className="text-gray-500 text-xs leading-relaxed">
