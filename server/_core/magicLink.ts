@@ -104,7 +104,7 @@ class MagicLinkService {
     const resend = this.getResend();
 
     const { error } = await resend.emails.send({
-      from: "A.Cosmos <login@acosmos.app>",
+      from: "A.Cosmos <onboarding@resend.dev>",
       to: email,
       subject: "Sign in to A.Cosmos",
       html: this.buildEmailHtml(magicLinkUrl),
