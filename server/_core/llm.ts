@@ -298,7 +298,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   }
 
   payload.max_completion_tokens = 1024;
-  payload.temperature = 0.7;
+  payload.temperature = 0.5;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
