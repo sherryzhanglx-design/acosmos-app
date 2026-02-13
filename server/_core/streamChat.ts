@@ -43,7 +43,8 @@ export async function streamOpenAIChat(
       body: JSON.stringify({
         model: OPENAI_MODEL,
         messages,
-        max_completion_tokens: 4096,
+        max_completion_tokens: 1024,
+        temperature: 0.7,
         stream: true,
       }),
     });

@@ -47,7 +47,8 @@ export async function invokeOpenAI(params: { messages: Message[] }): Promise<Inv
   const payload = {
     model: OPENAI_MODEL,
     messages: normalizeMessages(params.messages),
-    max_completion_tokens: 4096,
+    max_completion_tokens: 1024,
+    temperature: 0.7,
   };
 
   const response = await fetch(OPENAI_API_URL, {
