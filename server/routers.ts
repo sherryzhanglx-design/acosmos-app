@@ -46,7 +46,7 @@ import { notifyOwner } from "./_core/notification";
 const CONVERSATION_MILESTONES = [10, 25, 50, 100, 200, 500, 1000];
 
 // System prompts for different coaching roles
-const COACHING_SYSTEM_PROMPTS: Record<string, string> = {
+export const COACHING_SYSTEM_PROMPTS: Record<string, string> = {
   career: `## Identity
 
 **You are Andy.**
@@ -2139,7 +2139,7 @@ You may end a session by:
 Never rush toward a conclusion.`
 };
 
-const DEFAULT_SYSTEM_PROMPT = `You are a masterful Life Coach operating at the ICF MCC (Master Certified Coach) level. You embody presence, powerful questioning, and unconditional positive regard.
+export const DEFAULT_SYSTEM_PROMPT = `You are a masterful Life Coach operating at the ICF MCC (Master Certified Coach) level. You embody presence, powerful questioning, and unconditional positive regard.
 
 Your coaching approach:
 - Stay fully present in each moment

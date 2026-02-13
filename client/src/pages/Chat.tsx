@@ -44,6 +44,7 @@ export default function Chat() {
   const [selectedHistoryCard, setSelectedHistoryCard] = useState<ReflectionCardData | null>(null);
   const [showPhaseClosureNotice, setShowPhaseClosureNotice] = useState(false);
   const [phaseClosureShownThisSession, setPhaseClosureShownThisSession] = useState(false);
+  const [streamingMessageId, setStreamingMessageId] = useState<number | null>(null);
   
   // TTS state
   const [playingMessageId, setPlayingMessageId] = useState<number | null>(null);
@@ -63,6 +64,7 @@ export default function Chat() {
   );
   
   const createConversation = trpc.conversations.create.useMutation();
+  // sendMessage kept as fallback; primary path is streaming via /api/chat/stream
   const sendMessage = trpc.chat.send.useMutation();
   // Voice transcription uses direct REST endpoint /api/transcribe
   
@@ -130,7 +132,7 @@ export default function Chat() {
   }, [input]);
 
   const handleSend = async (text: string, isVoice = false) => {
-    if (!text.trim() || isLoading) return;
+    if (!text.trim() || isLoading || streamingMessageId !== null) return;
     
     const userMessage = text.trim();
     setInput("");
@@ -165,35 +167,92 @@ export default function Chat() {
         return;
       }
 
-      // Send message
-      const response = await sendMessage.mutateAsync({
-        conversationId: convId,
-        message: userMessage,
-        isVoiceInput: isVoice
+      // Add placeholder assistant message for streaming
+      const assistantMsgId = Date.now() + 1;
+      setMessages(prev => [...prev, {
+        id: assistantMsgId,
+        role: "assistant",
+        content: ""
+      }]);
+      setStreamingMessageId(assistantMsgId);
+      setIsLoading(false); // Hide typing dots since we show streaming text
+
+      // Stream the response via SSE
+      const response = await fetch("/api/chat/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          conversationId: convId,
+          message: userMessage,
+          isVoiceInput: isVoice,
+        }),
       });
 
-      // Add assistant response
-      const assistantContent = response.content;
-      
-      // Check for phase closure signal and show notice (only once per session)
-      if (hasPhaseClosureSignal(assistantContent) && !phaseClosureShownThisSession) {
-        setShowPhaseClosureNotice(true);
-        setPhaseClosureShownThisSession(true);
+      if (!response.ok) {
+        throw new Error(`Stream request failed: ${response.status}`);
       }
-      
-      // Remove the signal marker from displayed content
-      const displayContent = removePhaseClosureSignal(assistantContent);
-      
-      setMessages(prev => [...prev, {
-        id: Date.now() + 1,
-        role: "assistant",
-        content: displayContent
-      }]);
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error("No response body reader");
+
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let fullText = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.startsWith("data: ")) continue;
+
+          try {
+            const data = JSON.parse(trimmed.slice(6));
+            if (data.type === "chunk") {
+              fullText += data.content;
+              // Update the streaming message content
+              setMessages(prev => prev.map(m =>
+                m.id === assistantMsgId
+                  ? { ...m, content: fullText }
+                  : m
+              ));
+            } else if (data.type === "done") {
+              // Final content from server (already saved to DB)
+              const finalContent = data.content || fullText;
+              
+              // Check for phase closure signal
+              if (hasPhaseClosureSignal(finalContent) && !phaseClosureShownThisSession) {
+                setShowPhaseClosureNotice(true);
+                setPhaseClosureShownThisSession(true);
+              }
+              
+              const displayContent = removePhaseClosureSignal(finalContent);
+              setMessages(prev => prev.map(m =>
+                m.id === assistantMsgId
+                  ? { ...m, content: displayContent }
+                  : m
+              ));
+            } else if (data.type === "error") {
+              toast.error("Failed to generate response. Please try again.");
+            }
+          } catch {
+            // Skip malformed JSON
+          }
+        }
+      }
+
+      setStreamingMessageId(null);
     } catch (error) {
       console.error("Failed to send message:", error);
       toast.error("Failed to send message. Please try again.");
-      setMessages(prev => prev.filter(m => m.id !== tempUserMsg.id));
-    } finally {
+      // Remove both user message and empty assistant message on error
+      setMessages(prev => prev.filter(m => m.id !== tempUserMsg.id && m.content !== ""));
+      setStreamingMessageId(null);
       setIsLoading(false);
     }
   };
@@ -598,7 +657,22 @@ export default function Chat() {
                 )}
                 <div className="text-white/90 leading-relaxed">
                   {message.role === "assistant" ? (
-                    <Streamdown>{message.content}</Streamdown>
+                    message.content ? (
+                      <Streamdown
+                        parseIncompleteMarkdown={streamingMessageId === message.id}
+                        isAnimating={streamingMessageId === message.id}
+                      >
+                        {message.content}
+                      </Streamdown>
+                    ) : streamingMessageId === message.id ? (
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-teal-light typing-dot" />
+                        <div className="w-2 h-2 rounded-full bg-teal-light typing-dot" />
+                        <div className="w-2 h-2 rounded-full bg-teal-light typing-dot" />
+                      </div>
+                    ) : (
+                      <Streamdown>{message.content}</Streamdown>
+                    )
                   ) : (
                     message.content
                   )}
@@ -679,7 +753,7 @@ export default function Chat() {
             {/* Voice Input Button */}
             <button
               onClick={isRecording ? stopRecording : startRecording}
-              disabled={isLoading && !isRecording}
+              disabled={(isLoading || streamingMessageId !== null) && !isRecording}
               className={`relative flex-shrink-0 p-3 rounded-xl transition-all duration-300 ${
                 isRecording 
                   ? "bg-red-500/20 text-red-400 ring-2 ring-red-500/50 animate-pulse" 
@@ -701,7 +775,7 @@ export default function Chat() {
               <>
                 <button
                   onClick={() => setShowCardDrawer(true)}
-                  disabled={isLoading}
+                  disabled={isLoading || streamingMessageId !== null}
                   className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-amber-400/80 hover:bg-amber-500/10 hover:text-amber-400 border border-amber-500/20"
                   title="Draw a reflection card"
                 >
@@ -711,7 +785,7 @@ export default function Chat() {
                 {cardHistory.length > 0 && (
                   <button
                     onClick={() => setShowCardHistory(true)}
-                    disabled={isLoading}
+                    disabled={isLoading || streamingMessageId !== null}
                     className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-teal/80 hover:bg-teal/10 hover:text-teal border border-teal/20 relative"
                     title="View card history"
                   >
@@ -732,7 +806,7 @@ export default function Chat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Share what's on your mind..."
-                disabled={isLoading}
+                disabled={isLoading || streamingMessageId !== null}
                 rows={1}
                 className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
                 style={{ maxHeight: "150px" }}
@@ -742,10 +816,10 @@ export default function Chat() {
             {/* Send Button */}
             <Button
               onClick={() => handleSend(input)}
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || streamingMessageId !== null}
               className="flex-shrink-0 p-3 h-auto bg-gradient-to-r from-teal to-teal-light hover:opacity-90 disabled:opacity-50 rounded-xl"
             >
-              {isLoading ? (
+              {(isLoading || streamingMessageId !== null) ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <Send className="w-5 h-5" />
