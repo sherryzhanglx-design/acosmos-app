@@ -45,7 +45,19 @@ export default function Chat() {
   const [showPhaseClosureNotice, setShowPhaseClosureNotice] = useState(false);
   const [phaseClosureShownThisSession, setPhaseClosureShownThisSession] = useState(false);
   const [streamingMessageId, setStreamingMessageId] = useState<number | null>(null);
+  const [summaryGenerated, setSummaryGenerated] = useState(false);
   
+  // Session summary: inactivity timer ref
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const conversationIdRef = useRef<number | null>(null);
+  const messagesCountRef = useRef<number>(0);
+  const summaryGeneratedRef = useRef(false);
+
+  // Keep refs in sync with state
+  useEffect(() => { conversationIdRef.current = conversationId; }, [conversationId]);
+  useEffect(() => { messagesCountRef.current = messages.length; }, [messages]);
+  useEffect(() => { summaryGeneratedRef.current = summaryGenerated; }, [summaryGenerated]);
+
   // TTS state
   const [playingMessageId, setPlayingMessageId] = useState<number | null>(null);
   const [loadingTTSMessageId, setLoadingTTSMessageId] = useState<number | null>(null);
@@ -247,6 +259,9 @@ export default function Chat() {
       }
 
       setStreamingMessageId(null);
+      
+      // Reset inactivity timer after each message exchange
+      resetInactivityTimer();
     } catch (error) {
       console.error("Failed to send message:", error);
       toast.error("Failed to send message. Please try again.");
@@ -256,6 +271,81 @@ export default function Chat() {
       setIsLoading(false);
     }
   };
+
+  // --- Session Summary Logic ---
+  const triggerSessionSummary = useCallback(async (convId: number) => {
+    if (summaryGeneratedRef.current) return;
+    if (messagesCountRef.current < 2) return;
+    
+    summaryGeneratedRef.current = true;
+    setSummaryGenerated(true);
+    
+    try {
+      await fetch("/api/session-summary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ conversationId: convId }),
+      });
+      console.log("[SessionSummary] Summary generation triggered for conversation", convId);
+    } catch (error) {
+      console.error("[SessionSummary] Failed to trigger summary:", error);
+      // Reset so it can retry
+      summaryGeneratedRef.current = false;
+      setSummaryGenerated(false);
+    }
+  }, []);
+
+  const resetInactivityTimer = useCallback(() => {
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+    }
+    inactivityTimerRef.current = setTimeout(() => {
+      const convId = conversationIdRef.current;
+      if (convId && !summaryGeneratedRef.current) {
+        triggerSessionSummary(convId);
+      }
+    }, 10 * 60 * 1000); // 10 minutes
+  }, [triggerSessionSummary]);
+
+  // Page close / navigate away: trigger summary via sendBeacon
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      const convId = conversationIdRef.current;
+      if (convId && !summaryGeneratedRef.current && messagesCountRef.current >= 2) {
+        // Use sendBeacon for reliable delivery on page close
+        navigator.sendBeacon(
+          "/api/session-summary",
+          new Blob(
+            [JSON.stringify({ conversationId: convId })],
+            { type: "application/json" }
+          )
+        );
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Also trigger summary when navigating away within the app (component unmount)
+  useEffect(() => {
+    return () => {
+      const convId = conversationIdRef.current;
+      if (convId && !summaryGeneratedRef.current && messagesCountRef.current >= 2) {
+        fetch("/api/session-summary", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ conversationId: convId }),
+          keepalive: true,
+        }).catch(() => {});
+      }
+    };
+  }, []);
 
   const startRecording = async () => {
     try {

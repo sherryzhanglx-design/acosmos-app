@@ -9,7 +9,8 @@ import {
   userPreferences, InsertUserPreferences,
   cardHistory, InsertCardHistory, CardHistory,
   userUsage, InsertUserUsage, UserUsage,
-  usageLogs, InsertUsageLog, UsageLog
+  usageLogs, InsertUsageLog, UsageLog,
+  sessionSummaries, InsertSessionSummary, SessionSummary
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -1068,4 +1069,50 @@ export async function getWeeklySummary() {
       count: g.count || 0,
     })),
   };
+}
+
+
+// ============ Session Summary Operations ============
+
+/**
+ * Save an AI-generated session summary to the database.
+ * Called automatically when a session ends (user closes or 10min inactivity).
+ */
+export async function saveSessionSummary(data: InsertSessionSummary): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(sessionSummaries).values(data).returning({ id: sessionSummaries.id });
+  return result[0].id;
+}
+
+/**
+ * Check if a session summary already exists for a conversation.
+ * Prevents duplicate summary generation.
+ */
+export async function getSessionSummaryByConversationId(conversationId: number): Promise<SessionSummary | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select()
+    .from(sessionSummaries)
+    .where(eq(sessionSummaries.conversationId, conversationId))
+    .limit(1);
+  return result[0];
+}
+
+/**
+ * Get all session summaries for a user, ordered by most recent first.
+ * Used for growth review and personalization features.
+ */
+export async function getUserSessionSummaries(userId: number, limit: number = 50): Promise<SessionSummary[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const result = await db.select()
+    .from(sessionSummaries)
+    .where(eq(sessionSummaries.userId, userId))
+    .orderBy(desc(sessionSummaries.sessionDate))
+    .limit(limit);
+  return result;
 }

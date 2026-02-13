@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import { transcribeAudioBuffer } from "./voiceTranscription";
 import { textToSpeech, isTTSEnabled } from "./tts";
 import { streamOpenAIChat } from "./streamChat";
+import { generateSessionSummary } from "./sessionSummary";
 import { COACHING_SYSTEM_PROMPTS, DEFAULT_SYSTEM_PROMPT } from "../routers";
 import { 
   getConversationById, 
@@ -18,7 +19,9 @@ import {
   getConversationMessages, 
   updateConversation,
   incrementMessageCount,
-  logUsageAction 
+  logUsageAction,
+  saveSessionSummary,
+  getSessionSummaryByConversationId
 } from "../db";
 import { sdk } from "./sdk";
 
@@ -202,6 +205,81 @@ async function startServer() {
       } else {
         res.end();
       }
+    }
+  });
+
+  // Session summary endpoint — generates and saves AI summary for a conversation
+  app.post("/api/session-summary", express.json({ limit: "1mb" }), async (req, res) => {
+    try {
+      // Authenticate user via session cookie
+      const user = await sdk.authenticateRequest(req as any);
+      if (!user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      const { conversationId } = req.body;
+      if (!conversationId) {
+        return res.status(400).json({ error: "Missing conversationId" });
+      }
+
+      // Verify conversation belongs to user
+      const conversation = await getConversationById(conversationId, user.id);
+      if (!conversation) {
+        return res.status(404).json({ error: "Conversation not found" });
+      }
+
+      // Check if summary already exists (prevent duplicates)
+      const existing = await getSessionSummaryByConversationId(conversationId);
+      if (existing) {
+        return res.json({ status: "exists", id: existing.id });
+      }
+
+      // Get conversation messages
+      const history = await getConversationMessages(conversationId);
+      
+      // Only generate summary if there are at least 2 messages (1 user + 1 assistant)
+      if (history.length < 2) {
+        return res.json({ status: "skipped", reason: "Not enough messages" });
+      }
+
+      // Get guardian name from role
+      const role = await getCoachingRoleById(conversation.roleId);
+      const guardianName = role?.name || "Guardian";
+      const guardianSlug = role?.slug || "unknown";
+
+      // Calculate session rounds (number of user messages)
+      const sessionRounds = history.filter(m => m.role === "user").length;
+
+      // Generate summary using AI
+      const summaryResult = await generateSessionSummary(
+        history.map(m => ({ role: m.role, content: m.content })),
+        guardianName
+      );
+
+      if (!summaryResult) {
+        return res.status(500).json({ error: "Failed to generate summary" });
+      }
+
+      // Save to database
+      const summaryId = await saveSessionSummary({
+        conversationId,
+        userId: user.id,
+        guardian: guardianName,
+        topic: summaryResult.topic,
+        keyInsight: summaryResult.key_insight,
+        emotionalState: summaryResult.emotional_state,
+        actionCommitted: summaryResult.action_committed === "None" ? null : summaryResult.action_committed,
+        sessionRounds,
+        summary: summaryResult.summary,
+        sessionDate: conversation.createdAt || new Date(),
+      });
+
+      console.log(`[SessionSummary] Generated summary #${summaryId} for conversation #${conversationId} (${guardianName}, ${sessionRounds} rounds)`);
+
+      res.json({ status: "created", id: summaryId });
+    } catch (error) {
+      console.error("[SessionSummary] Endpoint error:", error);
+      res.status(500).json({ error: "Failed to generate session summary" });
     }
   });
 
