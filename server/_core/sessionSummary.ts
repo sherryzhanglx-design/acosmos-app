@@ -4,10 +4,13 @@
  * Automatically generates structured summaries of coaching conversations
  * using AI. Summaries are stored in the database for future growth review
  * and personalization features. Not visible to users.
+ * 
+ * Uses direct fetch to OpenAI API (no openai package dependency).
  */
-
-import OpenAI from "openai";
 import { ENV } from "./env";
+
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+const SUMMARY_MODEL = "gpt-4.1-mini";
 
 const SUMMARY_SYSTEM_PROMPT = `You are an internal analysis engine for a coaching platform called A.Cosmos. Your task is to analyze a coaching conversation and produce a structured JSON summary.
 
@@ -43,30 +46,43 @@ export async function generateSessionSummary(
   guardianName: string
 ): Promise<SummaryResult | null> {
   try {
-    const apiKey = ENV.OPENAI_API_KEY;
+    const apiKey = ENV.openaiApiKey;
     if (!apiKey) {
       console.error("[SessionSummary] No OpenAI API key configured");
       return null;
     }
-
-    const client = new OpenAI({ apiKey });
 
     // Build the conversation transcript for analysis
     const transcript = messages
       .map(m => `${m.role === "user" ? "User" : guardianName}: ${m.content}`)
       .join("\n\n");
 
-    const response = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
-      messages: [
-        { role: "system", content: SUMMARY_SYSTEM_PROMPT },
-        { role: "user", content: `Analyze the following coaching conversation with ${guardianName} and produce the JSON summary:\n\n${transcript}` },
-      ],
-      temperature: 0.3,
-      max_tokens: 500,
+    const response = await fetch(OPENAI_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: SUMMARY_MODEL,
+        messages: [
+          { role: "system", content: SUMMARY_SYSTEM_PROMPT },
+          { role: "user", content: `Analyze the following coaching conversation with ${guardianName} and produce the JSON summary:\n\n${transcript}` },
+        ],
+        temperature: 0.3,
+        max_tokens: 500,
+      }),
     });
 
-    const content = response.choices[0]?.message?.content?.trim();
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`[SessionSummary] OpenAI API error: ${response.status} – ${errorText}`);
+      return null;
+    }
+
+    const data = await response.json() as any;
+    const content = data.choices?.[0]?.message?.content?.trim();
+
     if (!content) {
       console.error("[SessionSummary] Empty response from AI");
       return null;
