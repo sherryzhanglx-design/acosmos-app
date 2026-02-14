@@ -76,7 +76,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
               What's on your mind today?
             </p>
             <p className="text-white/40 text-xs mt-1">
-              Share what you're feeling or thinking — I'll guide you to the right Guardian.
+              Share what you're feeling or thinking — I'll match you with the right guide.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
             </div>
             <div className="flex items-center gap-2 py-3">
               <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
-              <span className="text-white/50 text-sm">Finding the right Guardian for you...</span>
+              <span className="text-white/50 text-sm">Finding the right guide for you...</span>
             </div>
           </div>
         )}

@@ -254,7 +254,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          SECTION 3 — "Your Constellation of Guardians"
+          SECTION 3 — "Your Constellation of Guides"
           Guardian cards
           ═══════════════════════════════════════════════════ */}
       <section 
@@ -270,7 +270,7 @@ export default function Home() {
             }}
           >
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
-              Your Constellation of Guardians
+              Your Constellation of Guides
             </h2>
             <p className="text-white/50 max-w-lg mx-auto text-sm md:text-base">
               Wherever you are, whenever you need, they're here — quietly standing by.

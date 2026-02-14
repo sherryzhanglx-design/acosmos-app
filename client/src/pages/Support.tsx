@@ -35,7 +35,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "How do I switch between different guides?",
-    answer: "From the home screen, you can select any guide from the 'Your Constellation of Guardians' section. Each guide has their own specialty and approach. You can have ongoing conversations with multiple guides and switch between them at any time."
+    answer: "From the home screen, you can select any guide from the 'Your Constellation of Guides' section. Each guide has their own specialty and approach. You can have ongoing conversations with multiple guides and switch between them at any time."
   },
   {
     question: "Is A.Cosmos available in multiple languages?",
