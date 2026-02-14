@@ -40,6 +40,7 @@ import {
 } from "./db";
 import { invokeLLM } from "./_core/llm";
 import { shouldUseOpenAI, invokeOpenAI } from "./openai";
+import { growthCardsRouter } from "./growthCardsRouter";
 // Voice transcription now uses direct REST endpoint in index.ts
 import { notifyOwner } from "./_core/notification";
 
@@ -2305,6 +2306,9 @@ export const appRouter = router({
       return getUserSessionSummaries(ctx.user.id);
     }),
   }),
+
+  // Growth Cards
+  growthCards: growthCardsRouter,
 
   // Chat
   chat: router({

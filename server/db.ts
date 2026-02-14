@@ -10,7 +10,8 @@ import {
   cardHistory, InsertCardHistory, CardHistory,
   userUsage, InsertUserUsage, UserUsage,
   usageLogs, InsertUsageLog, UsageLog,
-  sessionSummaries, InsertSessionSummary, SessionSummary
+  sessionSummaries, InsertSessionSummary, SessionSummary,
+  growthCards, InsertGrowthCard, GrowthCard
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -1115,4 +1116,101 @@ export async function getUserSessionSummaries(userId: number, limit: number = 50
     .orderBy(desc(sessionSummaries.sessionDate))
     .limit(limit);
   return result;
+}
+
+// ============ Growth Cards Operations ============
+
+/**
+ * Create a new growth card
+ */
+export async function createGrowthCard(data: InsertGrowthCard): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(growthCards).values(data).returning({ id: growthCards.id });
+  return result[0].id;
+}
+
+/**
+ * Get all growth cards for a user
+ */
+export async function getUserGrowthCards(userId: number, guardianSlug?: string): Promise<GrowthCard[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  let query = db.select()
+    .from(growthCards)
+    .where(guardianSlug 
+      ? and(eq(growthCards.userId, userId), eq(growthCards.guardianSlug, guardianSlug))
+      : eq(growthCards.userId, userId))
+    .orderBy(desc(growthCards.conversationDate));
+  
+  const result = await query;
+  return result;
+}
+
+/**
+ * Get a single growth card by ID
+ */
+export async function getGrowthCardById(id: number, userId: number): Promise<GrowthCard | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select()
+    .from(growthCards)
+    .where(and(eq(growthCards.id, id), eq(growthCards.userId, userId)))
+    .limit(1);
+  
+  return result[0];
+}
+
+/**
+ * Get growth card by conversation ID
+ */
+export async function getGrowthCardByConversationId(conversationId: number, userId: number): Promise<GrowthCard | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select()
+    .from(growthCards)
+    .where(and(eq(growthCards.conversationId, conversationId), eq(growthCards.userId, userId)))
+    .limit(1);
+  
+  return result[0];
+}
+
+/**
+ * Update growth card (e.g., add user note)
+ */
+export async function updateGrowthCard(id: number, userId: number, data: Partial<InsertGrowthCard>): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  
+  await db.update(growthCards)
+    .set({ ...data, updatedAt: new Date() })
+    .where(and(eq(growthCards.id, id), eq(growthCards.userId, userId)));
+}
+
+/**
+ * Delete a growth card
+ */
+export async function deleteGrowthCard(id: number, userId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  
+  await db.delete(growthCards).where(and(eq(growthCards.id, id), eq(growthCards.userId, userId)));
+}
+
+/**
+ * Get growth card count for a user (for dashboard stats)
+ */
+export async function getUserGrowthCardCount(userId: number): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+  
+  const result = await db.select()
+    .from(growthCards)
+    .where(eq(growthCards.userId, userId));
+  
+  return result.length;
 }

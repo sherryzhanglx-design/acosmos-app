@@ -1,4 +1,4 @@
-import { integer, pgEnum, pgTable, text, timestamp, varchar, json, serial, boolean } from "drizzle-orm/pg-core";
+import { integer, pgEnum, pgTable, text, timestamp, varchar, json, serial, boolean, real } from "drizzle-orm/pg-core";
 
 /**
  * PostgreSQL enum types
@@ -225,3 +225,68 @@ export const sessionSummaries = pgTable("session_summaries", {
 
 export type SessionSummary = typeof sessionSummaries.$inferSelect;
 export type InsertSessionSummary = typeof sessionSummaries.$inferInsert;
+
+/**
+ * Growth Cards - Generated at the end of meaningful conversations
+ * These are visually refined, shareable cards that serve as growth artifacts
+ */
+export const growthCards = pgTable("growth_cards", {
+  id: serial("id").primaryKey(),
+  /** Links to users.id */
+  userId: integer("userId").notNull(),
+  /** Links to conversations.id */
+  conversationId: integer("conversationId").notNull(),
+  /** Links to session_summaries.id (optional, for data integrity) */
+  sessionSummaryId: integer("sessionSummaryId"),
+  
+  // Card Content (denormalized from sessionSummaries for independence)
+  /** Guardian name (e.g., "Andy", "Anya", "Alma", "Axel") */
+  guardian: varchar("guardian", { length: 64 }).notNull(),
+  /** Guardian slug (e.g., "career", "anxiety", "relationships", "transformation") */
+  guardianSlug: varchar("guardianSlug", { length: 64 }).notNull(),
+  /** Card type name (e.g., "Growth Card", "静心卡", "认知卡") */
+  cardTypeName: varchar("cardTypeName", { length: 64 }).notNull(),
+  /** Core topic of the conversation */
+  topic: text("topic"),
+  /** The most important insight (displayed as "Today's insight" or similar) */
+  keyInsight: text("keyInsight").notNull(),
+  /** What the user saw/realized (optional, for Andy's "What you saw" section) */
+  whatYouSaw: text("whatYouSaw"),
+  /** One step to try (action item) */
+  actionCommitted: text("actionCommitted"),
+  /** Keywords/tags extracted from the conversation */
+  keywords: json("keywords").$type<string[]>(),
+  /** Emotional state at end of session */
+  emotionalState: varchar("emotionalState", { length: 64 }),
+  
+  // Visual Design
+  /** Background template ID (from cardBackgrounds.ts) */
+  backgroundId: varchar("backgroundId", { length: 64 }).notNull(),
+  /** Layout version (for A/B testing or future variations) */
+  layoutVersion: varchar("layoutVersion", { length: 32 }).default('v1').notNull(),
+  /** Generated card image URL (stored in S3 or local storage) */
+  imageUrl: varchar("imageUrl", { length: 512 }),
+  /** Image format (webp, png, jpg) */
+  imageFormat: varchar("imageFormat", { length: 10 }).default('webp'),
+  
+  // Metadata for future features
+  /** User's personal note on this card (added later) */
+  userNote: text("userNote"),
+  /** Sentiment score (-1 to 1, for pattern detection) */
+  sentiment: real("sentiment").default(0),
+  /** Whether the card has been shared publicly */
+  isShared: integer("isShared").default(0).notNull(),
+  /** Public share URL (if shared) */
+  shareUrl: varchar("shareUrl", { length: 512 }),
+  
+  // Timestamps
+  /** Date of the conversation (for timeline display) */
+  conversationDate: timestamp("conversationDate").notNull(),
+  /** When the card was generated */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  /** Last updated (e.g., when user adds a note) */
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type GrowthCard = typeof growthCards.$inferSelect;
+export type InsertGrowthCard = typeof growthCards.$inferInsert;

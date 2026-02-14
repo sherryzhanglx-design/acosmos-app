@@ -1,14 +1,18 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import AccountLayout from "@/components/AccountLayout";
-import { MessageCircle, Clock, Heart } from "lucide-react";
+import { MessageCircle, Clock, Heart, Sparkles } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function AccountDashboard() {
   const { user } = useAuth();
   
+  const [, setLocation] = useLocation();
+  
   // Fetch user stats
   const { data: conversations } = trpc.conversations.listMine.useQuery();
   const { data: sessionSummaries } = trpc.sessionSummaries.listMine.useQuery();
+  const { data: growthCards } = trpc.growthCards.listMine.useQuery();
 
   // Calculate basic stats
   const totalConversations = conversations?.length || 0;
@@ -86,10 +90,57 @@ export default function AccountDashboard() {
               </div>
               <h4 className="text-white/80 font-medium">Growth Cards</h4>
             </div>
-            <p className="text-3xl font-bold text-white">{totalSummaries}</p>
-            <p className="text-white/50 text-sm mt-1">Insights collected</p>
+            <p className="text-3xl font-bold text-white">{growthCards?.length || 0}</p>
+            <p className="text-white/50 text-sm mt-1">Cards collected</p>
           </div>
         </div>
+
+        {/* Recent Growth Cards */}
+        {growthCards && growthCards.length > 0 && (
+          <div className="glass-card p-6 rounded-xl border border-white/10">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                Recent Growth Cards
+              </h3>
+              <button
+                onClick={() => setLocation('/account/cards')}
+                className="text-amber-400 hover:text-amber-300 text-sm transition-colors"
+              >
+                View All →
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {growthCards.slice(0, 3).map((card) => (
+                <div
+                  key={card.id}
+                  onClick={() => setLocation('/account/cards')}
+                  className="group cursor-pointer rounded-lg overflow-hidden border border-white/10 hover:border-amber-500/50 transition-all"
+                >
+                  {card.imageUrl && (
+                    <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-indigo-900/50 to-purple-900/50">
+                      <img
+                        src={card.imageUrl}
+                        alt={card.cardTypeName}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="p-3 bg-white/5">
+                    <p className="text-sm font-semibold text-amber-400 mb-1">
+                      {card.cardTypeName}
+                    </p>
+                    <p className="text-xs text-white/60">
+                      {new Date(card.conversationDate).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Recent Activity */}
         <div className="glass-card p-6 rounded-xl border border-white/10">

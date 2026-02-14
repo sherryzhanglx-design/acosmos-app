@@ -11,6 +11,11 @@ import { transcribeAudioBuffer } from "./voiceTranscription";
 import { textToSpeech, isTTSEnabled } from "./tts";
 import { streamOpenAIChat } from "./streamChat";
 import { generateSessionSummary } from "./sessionSummary";
+import { renderGrowthCard } from "../cardRenderer";
+import { getBackgroundForGuardian } from "../cardBackgrounds";
+import { createGrowthCard } from "../db";
+import { writeFile, mkdir } from "fs/promises";
+import { join } from "path";
 import { COACHING_SYSTEM_PROMPTS, DEFAULT_SYSTEM_PROMPT } from "../routers";
 import { 
   getConversationById, 
@@ -275,6 +280,85 @@ async function startServer() {
       });
 
       console.log(`[SessionSummary] Generated summary #${summaryId} for conversation #${conversationId} (${guardianName}, ${sessionRounds} rounds)`);
+
+      // Generate Growth Card asynchronously (don't block response)
+      (async () => {
+        try {
+          const guardianSlugMap: Record<string, string> = {
+            'Andy': 'career',
+            'Anya': 'anxiety',
+            'Alma': 'relationships',
+            'Axel': 'transformation',
+          };
+          
+          const cardTypeMap: Record<string, string> = {
+            'Andy': 'Growth Card',
+            'Anya': '静心卡',
+            'Alma': '关系卡',
+            'Axel': '认知卡',
+          };
+          
+          const guardianSlug = guardianSlugMap[guardianName] || 'career';
+          const cardTypeName = cardTypeMap[guardianName] || 'Growth Card';
+          const background = getBackgroundForGuardian(guardianSlug);
+          
+          // Format date
+          const date = new Date(conversation.createdAt || new Date());
+          const dateStr = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
+          
+          // Extract keywords from summary (simple approach: take first 3 meaningful words)
+          const keywords = summaryResult.topic
+            .split(' ')
+            .filter(w => w.length > 3)
+            .slice(0, 3);
+          
+          // Render card
+          const imageBuffer = await renderGrowthCard({
+            guardian: guardianName,
+            cardTypeName,
+            keyInsight: summaryResult.key_insight,
+            whatYouSaw: summaryResult.summary,
+            actionCommitted: summaryResult.action_committed === 'None' ? undefined : summaryResult.action_committed,
+            keywords,
+            date: dateStr,
+            backgroundId: background.id,
+          });
+          
+          // Save image
+          const uploadsDir = join(process.cwd(), 'uploads', 'growth-cards');
+          await mkdir(uploadsDir, { recursive: true });
+          
+          const filename = `card-${user.id}-${conversationId}-${Date.now()}.png`;
+          const filepath = join(uploadsDir, filename);
+          await writeFile(filepath, imageBuffer);
+          
+          const imageUrl = `/uploads/growth-cards/${filename}`;
+          
+          // Save to database
+          await createGrowthCard({
+            userId: user.id,
+            conversationId,
+            sessionSummaryId: summaryId,
+            guardian: guardianName,
+            guardianSlug,
+            cardTypeName,
+            topic: summaryResult.topic,
+            keyInsight: summaryResult.key_insight,
+            whatYouSaw: summaryResult.summary,
+            actionCommitted: summaryResult.action_committed === 'None' ? null : summaryResult.action_committed,
+            keywords,
+            emotionalState: summaryResult.emotional_state,
+            backgroundId: background.id,
+            imageUrl,
+            imageFormat: 'png',
+            conversationDate: conversation.createdAt || new Date(),
+          });
+          
+          console.log(`[GrowthCard] Generated card for conversation #${conversationId}`);
+        } catch (error) {
+          console.error(`[GrowthCard] Failed to generate card for conversation #${conversationId}:`, error);
+        }
+      })();
 
       res.json({ status: "created", id: summaryId });
     } catch (error) {
