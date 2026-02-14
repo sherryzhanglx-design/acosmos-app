@@ -938,7 +938,7 @@ export default function Chat() {
           </div>
           
           <p className="text-center text-white/50 text-xs mt-3">
-            Your conversations are private and secure
+            Your conversations are private and secure. <a href="/privacy" className="text-amber-400/70 hover:text-amber-400 hover:underline transition-colors">Privacy Policy</a>
           </p>
         </div>
       </div>
