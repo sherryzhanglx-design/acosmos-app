@@ -272,7 +272,7 @@ export default function Home() {
               Your Constellation of Guides
             </h2>
             <p className="text-white/50 max-w-lg mx-auto text-sm md:text-base">
-              Wherever you are, whenever you need, they're here — quietly standing by.
+              Wherever you are, whenever you need, they're here<br />— quietly standing by.
             </p>
           </div>
 
