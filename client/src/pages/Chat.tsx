@@ -670,11 +670,17 @@ export default function Chat() {
                   <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
                     I help you think about career and life direction
                   </p>
-                  <p className="text-white/60 max-w-md mx-auto mb-4 text-sm">
-                    — not by giving answers, but by helping you see what's already there.
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    — not by giving answers,
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    but by helping you see what's already there.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    You don't need to know where to start.
                   </p>
                   <p className="text-white/60 max-w-md mx-auto text-sm">
-                    You don't need to know where to start. Just tell me what's on your mind.
+                    Just tell me what's on your mind.
                   </p>
                 </>
               ) : selectedRole?.slug === 'anxiety' ? (
