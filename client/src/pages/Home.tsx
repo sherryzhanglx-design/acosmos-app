@@ -426,14 +426,14 @@ export default function Home() {
 
       {/* Apex Module — The Bigger Picture */}
       <section className="relative z-10 py-16 px-6">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div
             className="group p-8 rounded-2xl text-center transition-all duration-300 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
           >
             {/* Apex Avatar */}
-            <div className="w-24 h-24 mx-auto mb-4">
+            <div className="w-24 h-24 mx-auto mb-3">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663273647099/lFeQNJuuYnmtzMgA.png"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663273647099/yTDtbvJnQEGDaybl.png"
                 alt="Apex"
                 className="w-full h-full object-contain"
               />
@@ -442,22 +442,28 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-white mb-1">Apex</h3>
             <h4 className="text-lg font-semibold text-white/80 mb-3">The Bigger Picture</h4>
 
-            <p className="text-amber-400/90 italic text-sm font-serif mb-5">
+            <p className="text-amber-400/90 italic text-sm font-serif mb-4">
               "Every voice you've heard is yours. Now listen to them together."
             </p>
 
-            <p className="text-white/60 text-sm leading-relaxed mb-5">
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
               Apex sees what no single guide can — the patterns across your conversations,<br />
               the threads connecting career to love to identity to emotions.
             </p>
 
-            <div className="text-left max-w-md mx-auto space-y-3 mb-5">
-              <p className="text-white/60 text-sm leading-relaxed">
-                <span className="text-white font-semibold">Round Table</span> — Invite 2–3 guides into one conversation. Hear different perspectives on the same question, side by side.
-              </p>
-              <p className="text-white/60 text-sm leading-relaxed">
-                <span className="text-white font-semibold">Growth Map</span> — Bring your conversation summaries together. Apex finds the patterns, traces your trajectory, and shows you how far you've come.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left mb-6">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                <p className="text-white font-semibold mb-1.5">Round Table</p>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  Invite 2–3 guides into one conversation. Hear different perspectives on the same question, side by side.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                <p className="text-white font-semibold mb-1.5">Growth Map</p>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  Bring your conversation summaries together. Apex finds the patterns, traces your trajectory, and shows you how far you've come.
+                </p>
+              </div>
             </div>
 
             <span className="inline-block text-xs text-purple-400/80 bg-purple-500/10 px-3 py-1.5 rounded-full">
