@@ -638,7 +638,7 @@ export default function Chat() {
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
           {messages.length === 0 && (
-            <div className="text-center py-20">
+            <div className="text-center py-8">
               <div 
                 className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center overflow-hidden"
                 style={{ backgroundColor: `${selectedRole?.color}20` }}
@@ -918,8 +918,8 @@ export default function Chat() {
                 placeholder="Share what's on your mind..."
                 disabled={isLoading || streamingMessageId !== null}
                 rows={1}
-                className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
-                style={{ maxHeight: "150px" }}
+                className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all text-base"
+                style={{ maxHeight: "200px", minHeight: "56px" }}
               />
             </div>
 
@@ -937,7 +937,7 @@ export default function Chat() {
             </Button>
           </div>
           
-          <p className="text-center text-white/30 text-xs mt-3">
+          <p className="text-center text-white/50 text-xs mt-3">
             Your conversations are private and secure
           </p>
         </div>
