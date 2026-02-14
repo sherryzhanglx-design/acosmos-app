@@ -325,14 +325,14 @@
       radial-gradient(1px 1px at 80px 60px, rgba(255,245,200,0.14), transparent),
       radial-gradient(1.5px 1.5px at 150px 100px, rgba(255,245,200,0.18), transparent),
       radial-gradient(1px 1px at 200px 40px, rgba(255,245,200,0.12), transparent),
-      /* Top: focused beam origin — warmer & brighter */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(245,215,120,0.14) 0%, transparent 100%),
-      /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(225,185,85,0.20) 0%, transparent 100%),
-      /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(215,175,70,0.14) 0%, transparent 100%),
-      /* Lower: wide warm wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(205,165,65,0.08) 0%, transparent 100%),
+      /* Top: tight beam origin — warm golden column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(245,220,140,0.22) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(230,195,100,0.18) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(220,180,80,0.12) 0%, transparent 100%),
+      /* Lower: subtle warm glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(210,170,70,0.06) 0%, transparent 100%),
       /* Base — deeper */
       linear-gradient(180deg, #151e38 0%, #0e152a 40%, #080d1c 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
@@ -346,14 +346,14 @@
       radial-gradient(1px 1px at 30px 50px, rgba(220,210,255,0.16), transparent),
       radial-gradient(1px 1px at 100px 80px, rgba(220,210,255,0.12), transparent),
       radial-gradient(1.5px 1.5px at 180px 120px, rgba(220,210,255,0.16), transparent),
-      /* Top: focused beam origin — lavender, brighter */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(210,190,245,0.14) 0%, transparent 100%),
-      /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(190,170,235,0.20) 0%, transparent 100%),
-      /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(175,155,225,0.14) 0%, transparent 100%),
-      /* Lower: wide calming wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(165,148,215,0.08) 0%, transparent 100%),
+      /* Top: tight beam origin — lavender column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(215,195,248,0.22) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(195,175,238,0.18) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(180,160,228,0.12) 0%, transparent 100%),
+      /* Lower: subtle calming glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(170,152,218,0.06) 0%, transparent 100%),
       /* Base — deeper */
       linear-gradient(180deg, #161a3c 0%, #0f1230 40%, #080b22 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
@@ -367,14 +367,14 @@
       radial-gradient(1px 1px at 25px 40px, rgba(255,230,215,0.18), transparent),
       radial-gradient(1px 1px at 90px 70px, rgba(255,225,210,0.14), transparent),
       radial-gradient(1.5px 1.5px at 160px 110px, rgba(255,230,215,0.16), transparent),
-      /* Top: focused beam origin — rose-gold, brighter */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(245,180,155,0.14) 0%, transparent 100%),
-      /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(230,160,140,0.20) 0%, transparent 100%),
-      /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(220,150,130,0.14) 0%, transparent 100%),
-      /* Lower: wide warm wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(210,142,125,0.08) 0%, transparent 100%),
+      /* Top: tight beam origin — rose-gold column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(248,185,158,0.22) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(235,165,142,0.18) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(225,155,132,0.12) 0%, transparent 100%),
+      /* Lower: subtle warm glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(215,145,128,0.06) 0%, transparent 100%),
       /* Base — deeper */
       linear-gradient(180deg, #221620 0%, #18101c 40%, #0d0914 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
@@ -388,14 +388,14 @@
       radial-gradient(1px 1px at 20px 35px, rgba(220,228,248,0.18), transparent),
       radial-gradient(1px 1px at 85px 65px, rgba(215,225,245,0.14), transparent),
       radial-gradient(1.5px 1.5px at 155px 105px, rgba(220,228,248,0.16), transparent),
-      /* Top: focused beam origin — cool silver, brighter */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(210,220,245,0.14) 0%, transparent 100%),
-      /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(195,205,238,0.20) 0%, transparent 100%),
-      /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(185,195,228,0.14) 0%, transparent 100%),
-      /* Lower: wide cool wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(175,188,220,0.08) 0%, transparent 100%),
+      /* Top: tight beam origin — cool silver column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(215,225,248,0.22) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(200,210,240,0.18) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(190,200,232,0.12) 0%, transparent 100%),
+      /* Lower: subtle cool glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(180,192,225,0.06) 0%, transparent 100%),
       /* Base — deeper */
       linear-gradient(180deg, #141a34 0%, #0e1228 40%, #080c1e 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
