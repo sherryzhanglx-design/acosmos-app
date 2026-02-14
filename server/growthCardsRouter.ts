@@ -20,8 +20,7 @@ import {
 } from './db';
 import { renderGrowthCard } from './cardRenderer';
 import { getBackgroundForGuardian } from './cardBackgrounds';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { saveGrowthCardImage } from './s3Storage';
 
 /**
  * Guardian slug mapping
@@ -90,15 +89,13 @@ export const growthCardsRouter = router({
         backgroundId: background.id,
       });
       
-      // Save image to disk (in production, upload to S3)
-      const uploadsDir = join(process.cwd(), 'uploads', 'growth-cards');
-      await mkdir(uploadsDir, { recursive: true });
-      
-      const filename = `card-${ctx.user.id}-${input.conversationId}-${Date.now()}.png`;
-      const filepath = join(uploadsDir, filename);
-      await writeFile(filepath, imageBuffer);
-      
-      const imageUrl = `/uploads/growth-cards/${filename}`;
+      // Save image (automatically uses S3 if configured, otherwise local storage)
+      const imageUrl = await saveGrowthCardImage(
+        imageBuffer,
+        ctx.user.id,
+        input.conversationId,
+        'png'
+      );
       
       // Save to database
       const cardId = await createGrowthCard({

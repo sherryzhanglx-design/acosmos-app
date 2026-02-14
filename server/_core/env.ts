@@ -20,6 +20,12 @@ export const ENV = {
   // Public URL for OAuth redirect (auto-detected if not set)
   publicUrl: process.env.PUBLIC_URL ?? "",
 
+  // AWS S3 for Growth Card storage (optional, falls back to local storage)
+  awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
+  awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
+  awsS3BucketName: process.env.AWS_S3_BUCKET_NAME ?? "",
+  awsS3Region: process.env.AWS_S3_REGION ?? "us-east-1",
+
   // Legacy — kept for backward compatibility during migration
   /** @deprecated Use ownerGoogleId instead */
   ownerOpenId: process.env.OWNER_OPEN_ID ?? "",
