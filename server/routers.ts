@@ -35,7 +35,8 @@ import {
   getAllUsersForExport,
   getAllUsageLogsForExport,
   getDailySummary,
-  getWeeklySummary
+  getWeeklySummary,
+  getUserSessionSummaries
 } from "./db";
 import { invokeLLM } from "./_core/llm";
 import { shouldUseOpenAI, invokeOpenAI } from "./openai";
@@ -2291,6 +2292,18 @@ export const appRouter = router({
         await updateConversation(input.id, { isArchived: 1 });
         return { success: true };
       }),
+    
+    // Alias for Account page
+    listMine: protectedProcedure.query(async ({ ctx }) => {
+      return getUserConversations(ctx.user.id);
+    }),
+  }),
+
+  // Session Summaries
+  sessionSummaries: router({
+    listMine: protectedProcedure.query(async ({ ctx }) => {
+      return getUserSessionSummaries(ctx.user.id);
+    }),
   }),
 
   // Chat

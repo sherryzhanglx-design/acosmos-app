@@ -18,6 +18,11 @@ import Support from "./pages/Support";
 import PurchaseTerms from "./pages/PurchaseTerms";
 import Login from "./pages/Login";
 import PWAInstallPrompt from "./components/PWAInstallPrompt";
+import AccountDashboard from "./pages/AccountDashboard";
+import AccountCards from "./pages/AccountCards";
+import AccountConversations from "./pages/AccountConversations";
+import AccountSettings from "./pages/AccountSettings";
+import AccountBilling from "./pages/AccountBilling";
 
 function Router() {
   return (
@@ -36,6 +41,11 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/support" component={Support} />
       <Route path="/purchase-terms" component={PurchaseTerms} />
+      <Route path="/account/dashboard" component={AccountDashboard} />
+      <Route path="/account/cards" component={AccountCards} />
+      <Route path="/account/conversations" component={AccountConversations} />
+      <Route path="/account/settings" component={AccountSettings} />
+      <Route path="/account/billing" component={AccountBilling} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

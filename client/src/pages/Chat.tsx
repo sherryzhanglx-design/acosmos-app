@@ -14,6 +14,7 @@ import { Streamdown } from "streamdown";
 import { toast } from "sonner";
 import { ReflectionCardDrawer, DrawCardButton, type ReflectionCardData } from "@/components/ReflectionCard";
 import { PhaseClosureNotice, hasPhaseClosureSignal, removePhaseClosureSignal } from "@/components/PhaseClosureNotice";
+import UserAvatarMenu from "@/components/UserAvatarMenu";
 
 
 const iconMap: Record<string, LucideIcon> = {
@@ -627,9 +628,7 @@ export default function Chat() {
             >
               <History className="w-5 h-5 text-white/70" />
             </button>
-            <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-              <MoreVertical className="w-5 h-5 text-white/70" />
-            </button>
+            <UserAvatarMenu />
           </div>
         </div>
       </header>
