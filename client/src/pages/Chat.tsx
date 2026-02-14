@@ -724,13 +724,31 @@ export default function Chat() {
               ) : selectedRole?.slug === 'relationships' ? (
                 // Alma's welcome (love/intimacy)
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Alma.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I'm here to help you see what's happening in your relationships — not to judge, not to fix, just to help you understand.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Your task is not to seek for love,
+                    <br />
+                    but merely to seek and find all the barriers
+                    <br />
+                    within yourself that you have built against it." — Rumi
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I'm here to help you see what's happening in your relationships
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    — not to judge, not to fix, just to help you understand.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                     What's on your heart? Take your time.
                   </p>
                 </>
