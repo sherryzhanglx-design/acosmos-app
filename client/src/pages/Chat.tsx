@@ -640,11 +640,10 @@ export default function Chat() {
           {messages.length === 0 && (
             <div className="text-center py-4">
               <div 
-                className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center overflow-hidden"
-                style={{ backgroundColor: `${selectedRole?.color}20` }}
+                className="w-24 h-24 mx-auto mb-6 flex items-center justify-center"
               >
                 {selectedRole?.avatar ? (
-                  <img src={selectedRole.avatar} alt={selectedRole.name} className="w-[85%] h-[85%] object-contain object-center" />
+                  <img src={selectedRole.avatar} alt={selectedRole.name} className="w-full h-full object-contain object-center" />
                 ) : (
                   <IconComponent className="w-10 h-10" color={selectedRole?.color || undefined} />
                 )}
