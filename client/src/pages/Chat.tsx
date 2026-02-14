@@ -857,7 +857,7 @@ export default function Chat() {
       </div>
 
       {/* Input Area */}
-      <div className="flex-shrink-0 px-4 py-4 border-t border-white/10">
+      <div className="flex-shrink-0 px-4 py-3">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-end gap-3">
             {/* Voice Input Button */}
@@ -917,9 +917,9 @@ export default function Chat() {
                 onKeyDown={handleKeyDown}
                 placeholder="Share what's on your mind..."
                 disabled={isLoading || streamingMessageId !== null}
-                rows={1}
+                rows={3}
                 className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all text-base"
-                style={{ maxHeight: "200px", minHeight: "56px" }}
+                style={{ maxHeight: "200px" }}
               />
             </div>
 

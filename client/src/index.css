@@ -330,9 +330,9 @@
       radial-gradient(ellipse at 70% 80%, oklch(0.3 0.1 230 / 0.2) 0%, transparent 35%),
       /* Deep navy blue gradient - North Star theme */
       linear-gradient(180deg, 
-        oklch(0.14 0.08 240) 0%,
-        oklch(0.11 0.07 245) 40%,
-        oklch(0.08 0.06 250) 100%
+        oklch(0.20 0.07 240) 0%,
+        oklch(0.16 0.06 245) 40%,
+        oklch(0.12 0.05 250) 100%
       );
     background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
@@ -351,9 +351,9 @@
       radial-gradient(ellipse at 50% 50%, oklch(0.22 0.06 270 / 0.2) 0%, transparent 60%),
       /* Purple-blue gradient - Jupiter/calm theme */
       linear-gradient(180deg, 
-        oklch(0.13 0.07 275) 0%,
-        oklch(0.10 0.06 280) 50%,
-        oklch(0.07 0.05 285) 100%
+        oklch(0.19 0.07 275) 0%,
+        oklch(0.15 0.06 280) 50%,
+        oklch(0.11 0.05 285) 100%
       );
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
@@ -371,9 +371,9 @@
       radial-gradient(ellipse at 75% 25%, oklch(0.32 0.1 350 / 0.2) 0%, transparent 40%),
       /* Warm coral to deep rose gradient - Venus/love theme */
       linear-gradient(180deg, 
-        oklch(0.14 0.06 340) 0%,
-        oklch(0.11 0.05 350) 50%,
-        oklch(0.08 0.04 0) 100%
+        oklch(0.20 0.06 340) 0%,
+        oklch(0.16 0.05 350) 50%,
+        oklch(0.12 0.04 0) 100%
       );
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
@@ -392,9 +392,9 @@
       radial-gradient(ellipse at 50% 80%, oklch(0.25 0.04 240 / 0.15) 0%, transparent 40%),
       /* Silver-gray to deep blue gradient - Mirror/reflection theme */
       linear-gradient(180deg, 
-        oklch(0.16 0.03 230) 0%,
-        oklch(0.12 0.04 245) 50%,
-        oklch(0.08 0.05 260) 100%
+        oklch(0.22 0.03 230) 0%,
+        oklch(0.17 0.04 245) 50%,
+        oklch(0.12 0.05 260) 100%
       );
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
