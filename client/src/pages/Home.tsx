@@ -141,7 +141,6 @@ export default function Home() {
               alt="A.Cosmos" 
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl object-cover shadow-lg shadow-amber-500/20"
             />
-            <span className="text-lg sm:text-xl font-semibold text-gold-gradient">A.Cosmos</span>
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4">
