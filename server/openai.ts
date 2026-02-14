@@ -8,7 +8,7 @@ import { ENV } from "./_core/env";
 import type { Message, InvokeResult } from "./_core/llm";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const OPENAI_MODEL = "gpt-5.2"; // Upgraded to GPT-5.2 — OpenAI's flagship model as of Feb 2026
+const OPENAI_MODEL = "gpt-4.1"; // Testing GPT-4.1 — smartest non-reasoning model
 
 // Guardians that should use OpenAI instead of built-in LLM
 const OPENAI_GUARDIAN_SLUGS = new Set(["career", "anxiety", "relationships", "transformation"]);

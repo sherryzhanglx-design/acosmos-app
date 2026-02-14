@@ -211,7 +211,7 @@ const normalizeToolChoice = (
 
 // Phase 1 Migration: OpenAI API replaces Forge API
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const DEFAULT_MODEL = "gpt-5.2"; // OpenAI flagship model — unified for all Guardians (gpt-4o retired 2/13/2026)
+const DEFAULT_MODEL = "gpt-4.1"; // Testing GPT-4.1 — smartest non-reasoning model
 
 const resolveApiUrl = () => OPENAI_API_URL;
 

@@ -10,7 +10,7 @@
 import { ENV } from "./env";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const OPENAI_MODEL = "gpt-5.2";
+const OPENAI_MODEL = "gpt-4.1";
 
 interface StreamMessage {
   role: "system" | "user" | "assistant";
