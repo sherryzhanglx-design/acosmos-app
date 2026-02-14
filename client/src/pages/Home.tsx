@@ -427,39 +427,23 @@ export default function Home() {
       {/* Apex Module — Preserved for future update */}
       <section className="relative z-10 py-12 px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <button
-              onClick={() => isAuthenticated ? navigate("/chat") : window.location.href = getLoginUrl()}
-              className="group p-6 rounded-2xl text-left transition-all duration-300 hover:scale-[1.02] hover:border-amber-500/50 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
+          <div className="max-w-md mx-auto">
+            <div
+              className="group p-6 rounded-2xl text-center transition-all duration-300 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <MessageCircle className="w-6 h-6 text-amber-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors">
-                Guided Reflection
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Engage in meaningful, distraction-free conversations with your AI guide.
-              </p>
-            </button>
-
-            <button
-              onClick={() => isAuthenticated ? navigate("/reflection") : window.location.href = getLoginUrl()}
-              className="group p-6 rounded-2xl text-left transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/50 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center mb-4 mx-auto">
                 <Layers className="w-6 h-6 text-purple-400" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">
                 Reflection & Integration
               </h3>
               <p className="text-white/50 text-sm leading-relaxed">
-                Meet Apex — synthesize insights across guardians for deeper understanding.
+                Meet Apex — synthesize insights across guides for deeper understanding.
               </p>
               <span className="inline-block mt-2 text-xs text-purple-400/80 bg-purple-500/10 px-2 py-1 rounded-full">
                 Coming Soon
               </span>
-            </button>
+            </div>
           </div>
         </div>
       </section>
@@ -472,7 +456,7 @@ export default function Home() {
               <h4 className="text-white font-semibold mb-4">Product</h4>
               <ul className="space-y-2">
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Features</a></li>
-                <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Guardians</a></li>
+                <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">AI Guides</a></li>
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Pricing</a></li>
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Mobile App</a></li>
               </ul>

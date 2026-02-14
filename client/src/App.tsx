@@ -27,7 +27,7 @@ function Router() {
       <Route path="/chat/:roleSlug?" component={Chat} />
       <Route path="/conversation/:id" component={Chat} />
       <Route path="/history" component={History} />
-      <Route path="/reflection" component={Reflection} />
+      {/* <Route path="/reflection" component={Reflection} /> — hidden for now */}
       <Route path="/apex" component={ApexChat} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/usage" component={UsageDashboard} />
