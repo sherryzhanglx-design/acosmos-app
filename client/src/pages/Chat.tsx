@@ -638,7 +638,7 @@ export default function Chat() {
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
           {messages.length === 0 && (
-            <div className="text-center py-8">
+            <div className="text-center py-4">
               <div 
                 className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center overflow-hidden"
                 style={{ backgroundColor: `${selectedRole?.color}20` }}
@@ -679,7 +679,7 @@ export default function Chat() {
                   <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
                     You don't need to know where to start.
                   </p>
-                  <p className="text-white/60 max-w-md mx-auto text-sm">
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                     Just tell me what's on your mind.
                   </p>
                 </>
@@ -857,7 +857,7 @@ export default function Chat() {
       </div>
 
       {/* Input Area */}
-      <div className="flex-shrink-0 px-4 py-3">
+      <div className="flex-shrink-0 px-4 py-2">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-end gap-3">
             {/* Voice Input Button */}
@@ -917,9 +917,9 @@ export default function Chat() {
                 onKeyDown={handleKeyDown}
                 placeholder="Share what's on your mind..."
                 disabled={isLoading || streamingMessageId !== null}
-                rows={3}
+                rows={4}
                 className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all text-base"
-                style={{ maxHeight: "200px" }}
+                style={{ maxHeight: "240px" }}
               />
             </div>
 
