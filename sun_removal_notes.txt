@@ -1,0 +1,7 @@
+Sun removal attempt 1:
+- The solid orange fill of the sun was mostly removed
+- But the outline/border of the sun circle remains (thin orange line)
+- Some rays (small orange dashes) remain around the circle
+- There's a remaining orange triangle near the neck/collar area
+- Need to widen the color range to catch the lighter orange outlines and rays
+- Also need to catch the remaining fill near the collar

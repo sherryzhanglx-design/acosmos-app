@@ -424,26 +424,45 @@ export default function Home() {
      </div>
    </section>
 
-      {/* Apex Module — Preserved for future update */}
-      <section className="relative z-10 py-12 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="max-w-md mx-auto">
-            <div
-              className="group p-6 rounded-2xl text-center transition-all duration-300 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center mb-4 mx-auto">
-                <Layers className="w-6 h-6 text-purple-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
-                Reflection & Integration
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Meet Apex — synthesize insights across guides for deeper understanding.
-              </p>
-              <span className="inline-block mt-2 text-xs text-purple-400/80 bg-purple-500/10 px-2 py-1 rounded-full">
-                Coming Soon
-              </span>
+      {/* Apex Module — The Bigger Picture */}
+      <section className="relative z-10 py-16 px-6">
+        <div className="max-w-2xl mx-auto">
+          <div
+            className="group p-8 rounded-2xl text-center transition-all duration-300 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
+          >
+            {/* Apex Avatar */}
+            <div className="w-24 h-24 mx-auto mb-4">
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663273647099/lFeQNJuuYnmtzMgA.png"
+                alt="Apex"
+                className="w-full h-full object-contain"
+              />
             </div>
+
+            <h3 className="text-2xl font-bold text-white mb-1">Apex</h3>
+            <h4 className="text-lg font-semibold text-white/80 mb-3">The Bigger Picture</h4>
+
+            <p className="text-amber-400/90 italic text-sm font-serif mb-5">
+              "Every voice you've heard is yours. Now listen to them together."
+            </p>
+
+            <p className="text-white/60 text-sm leading-relaxed mb-5">
+              Apex sees what no single guide can — the patterns across your conversations,<br />
+              the threads connecting career to love to identity to emotions.
+            </p>
+
+            <div className="text-left max-w-md mx-auto space-y-3 mb-5">
+              <p className="text-white/60 text-sm leading-relaxed">
+                <span className="text-white font-semibold">Round Table</span> — Invite 2–3 guides into one conversation. Hear different perspectives on the same question, side by side.
+              </p>
+              <p className="text-white/60 text-sm leading-relaxed">
+                <span className="text-white font-semibold">Growth Map</span> — Bring your conversation summaries together. Apex finds the patterns, traces your trajectory, and shows you how far you've come.
+              </p>
+            </div>
+
+            <span className="inline-block text-xs text-purple-400/80 bg-purple-500/10 px-3 py-1.5 rounded-full">
+              Coming soon for Pro members
+            </span>
           </div>
         </div>
       </section>
