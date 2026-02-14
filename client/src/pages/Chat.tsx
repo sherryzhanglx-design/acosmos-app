@@ -581,7 +581,7 @@ export default function Chat() {
       case 'career': return 'coach-bg-andy';
       case 'anxiety': return 'coach-bg-anya';
       case 'relationships': return 'coach-bg-alma';
-      case 'mirror': return 'coach-bg-axel';
+      case 'transformation': return 'coach-bg-axel';
       default: return 'cinematic-bg';
     }
   };
@@ -692,13 +692,31 @@ export default function Chat() {
                   />
                 ) : (
                   <>
-                    <h2 className="text-2xl font-semibold text-white mb-3">
+                    <h2 className="text-2xl font-semibold text-white mb-2">
                       I'm Anya.
                     </h2>
-                    <p className="text-white/60 max-w-md mx-auto mb-4">
-                      I'm here to walk beside you — not to fix or calm, but to help you find where you stand.
+                    <p 
+                      className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                      style={{
+                        background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      "You are not a drop in the ocean.<br className="hidden" />
+                      You are the entire ocean in a drop." — Rumi
                     </p>
-                    <p className="text-white/50 max-w-md mx-auto text-sm">
+                    <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                      I'm here to walk beside you
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                      — not to fix or calm,
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                      but to help you find where you stand.
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                       What's weighing on you? Take your time.
                     </p>
                     <DrawCardButton onClick={() => setShowCardDrawer(true)} />

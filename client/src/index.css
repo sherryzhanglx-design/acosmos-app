@@ -339,23 +339,23 @@
     background-attachment: fixed;
   }
 
-  /* Anya - Jupiter: F5 Illuminate — soft lavender beam from top */
+  /* Anya - Jupiter: F5 Illuminate — grounding green beam from top */
   .coach-bg-anya {
     background:
-      /* Stars */
-      radial-gradient(1px 1px at 30px 50px, rgba(220,210,255,0.16), transparent),
-      radial-gradient(1px 1px at 100px 80px, rgba(220,210,255,0.12), transparent),
-      radial-gradient(1.5px 1.5px at 180px 120px, rgba(220,210,255,0.16), transparent),
-      /* Top: tight beam origin — lavender column */
-      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(215,195,248,0.22) 0%, transparent 100%),
+      /* Stars with green-tinted warmth */
+      radial-gradient(1px 1px at 30px 50px, rgba(200,225,200,0.16), transparent),
+      radial-gradient(1px 1px at 100px 80px, rgba(195,220,195,0.12), transparent),
+      radial-gradient(1.5px 1.5px at 180px 120px, rgba(200,225,200,0.16), transparent),
+      /* Top: tight beam origin — sage/forest green column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(160,200,160,0.24) 0%, transparent 100%),
       /* Upper-mid: beam slightly widens */
-      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(195,175,238,0.18) 0%, transparent 100%),
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(140,185,145,0.20) 0%, transparent 100%),
       /* Mid: gentle spread, still focused */
-      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(180,160,228,0.12) 0%, transparent 100%),
-      /* Lower: subtle calming glow */
-      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(170,152,218,0.06) 0%, transparent 100%),
-      /* Base — deeper */
-      linear-gradient(180deg, #161a3c 0%, #0f1230 40%, #080b22 100%);
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(125,170,130,0.13) 0%, transparent 100%),
+      /* Lower: subtle earthy green glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(110,155,115,0.06) 0%, transparent 100%),
+      /* Base — deep forest night */
+      linear-gradient(180deg, #121e1a 0%, #0c1612 40%, #070d0a 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }

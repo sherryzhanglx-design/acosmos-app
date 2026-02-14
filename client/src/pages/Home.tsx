@@ -349,7 +349,7 @@ export default function Home() {
                       <p className={`text-sm font-medium tracking-wide transition-colors ${isHovered ? 'text-amber-400/80' : 'text-white/50'}`}>
                         {{
                           career: 'Career',
-                          anxiety: 'Calm',
+                          anxiety: 'Emotions',
                           relationships: 'Love',
                           transformation: 'Blind Spots',
                           leadership: 'Leadership',
@@ -413,7 +413,7 @@ export default function Home() {
                       <p className="text-white/40 text-sm font-medium tracking-wide">
                         {{
                           career: 'Career',
-                          anxiety: 'Calm',
+                          anxiety: 'Emotions',
                           relationships: 'Love',
                           transformation: 'Blind Spots',
                           leadership: 'Leadership',
