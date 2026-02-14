@@ -321,20 +321,20 @@
   .coach-bg-andy {
     background:
       /* Stars */
-      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.15), transparent),
-      radial-gradient(1px 1px at 80px 60px, rgba(255,255,255,0.12), transparent),
-      radial-gradient(1.5px 1.5px at 150px 100px, rgba(255,255,255,0.15), transparent),
-      radial-gradient(1px 1px at 200px 40px, rgba(255,255,255,0.10), transparent),
-      /* Top: focused beam origin */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(235,205,130,0.09) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20px 30px, rgba(255,245,200,0.18), transparent),
+      radial-gradient(1px 1px at 80px 60px, rgba(255,245,200,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 150px 100px, rgba(255,245,200,0.18), transparent),
+      radial-gradient(1px 1px at 200px 40px, rgba(255,245,200,0.12), transparent),
+      /* Top: focused beam origin — warmer & brighter */
+      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(245,215,120,0.14) 0%, transparent 100%),
       /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(212,176,98,0.14) 0%, transparent 100%),
+      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(225,185,85,0.20) 0%, transparent 100%),
       /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(200,165,80,0.10) 0%, transparent 100%),
+      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(215,175,70,0.14) 0%, transparent 100%),
       /* Lower: wide warm wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(195,158,75,0.06) 0%, transparent 100%),
-      /* Base */
-      linear-gradient(180deg, #1d2844 0%, #151d36 40%, #0f1629 100%);
+      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(205,165,65,0.08) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #151e38 0%, #0e152a 40%, #080d1c 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
@@ -343,19 +343,19 @@
   .coach-bg-anya {
     background:
       /* Stars */
-      radial-gradient(1px 1px at 30px 50px, rgba(255,255,255,0.12), transparent),
-      radial-gradient(1px 1px at 100px 80px, rgba(255,255,255,0.10), transparent),
-      radial-gradient(1.5px 1.5px at 180px 120px, rgba(255,255,255,0.12), transparent),
-      /* Top: focused beam origin — lavender tint */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(200,180,235,0.09) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30px 50px, rgba(220,210,255,0.16), transparent),
+      radial-gradient(1px 1px at 100px 80px, rgba(220,210,255,0.12), transparent),
+      radial-gradient(1.5px 1.5px at 180px 120px, rgba(220,210,255,0.16), transparent),
+      /* Top: focused beam origin — lavender, brighter */
+      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(210,190,245,0.14) 0%, transparent 100%),
       /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(180,160,220,0.14) 0%, transparent 100%),
+      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(190,170,235,0.20) 0%, transparent 100%),
       /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(165,145,210,0.10) 0%, transparent 100%),
+      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(175,155,225,0.14) 0%, transparent 100%),
       /* Lower: wide calming wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(155,138,200,0.06) 0%, transparent 100%),
-      /* Base */
-      linear-gradient(180deg, #1e2248 0%, #171a38 40%, #0f122a 100%);
+      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(165,148,215,0.08) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #161a3c 0%, #0f1230 40%, #080b22 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
@@ -364,19 +364,19 @@
   .coach-bg-alma {
     background:
       /* Stars with warmer tint */
-      radial-gradient(1px 1px at 25px 40px, rgba(255,240,230,0.15), transparent),
-      radial-gradient(1px 1px at 90px 70px, rgba(255,235,220,0.12), transparent),
-      radial-gradient(1.5px 1.5px at 160px 110px, rgba(255,240,230,0.14), transparent),
-      /* Top: focused beam origin — rose-gold tint */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(235,175,155,0.09) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25px 40px, rgba(255,230,215,0.18), transparent),
+      radial-gradient(1px 1px at 90px 70px, rgba(255,225,210,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 160px 110px, rgba(255,230,215,0.16), transparent),
+      /* Top: focused beam origin — rose-gold, brighter */
+      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(245,180,155,0.14) 0%, transparent 100%),
       /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(220,155,140,0.14) 0%, transparent 100%),
+      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(230,160,140,0.20) 0%, transparent 100%),
       /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(210,145,130,0.10) 0%, transparent 100%),
+      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(220,150,130,0.14) 0%, transparent 100%),
       /* Lower: wide warm wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(200,138,125,0.06) 0%, transparent 100%),
-      /* Base */
-      linear-gradient(180deg, #2a1e2e 0%, #1f1628 40%, #14101e 100%);
+      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(210,142,125,0.08) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #221620 0%, #18101c 40%, #0d0914 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
@@ -385,19 +385,19 @@
   .coach-bg-axel {
     background:
       /* Stars with silver tint */
-      radial-gradient(1px 1px at 20px 35px, rgba(230,235,245,0.15), transparent),
-      radial-gradient(1px 1px at 85px 65px, rgba(225,230,240,0.12), transparent),
-      radial-gradient(1.5px 1.5px at 155px 105px, rgba(230,235,245,0.14), transparent),
-      /* Top: focused beam origin — cool silver tint */
-      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(200,210,235,0.09) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20px 35px, rgba(220,228,248,0.18), transparent),
+      radial-gradient(1px 1px at 85px 65px, rgba(215,225,245,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 155px 105px, rgba(220,228,248,0.16), transparent),
+      /* Top: focused beam origin — cool silver, brighter */
+      radial-gradient(ellipse 30% 25% at 50% 2%, rgba(210,220,245,0.14) 0%, transparent 100%),
       /* Upper-mid: beam widens */
-      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(185,195,225,0.14) 0%, transparent 100%),
+      radial-gradient(ellipse 45% 50% at 50% 15%, rgba(195,205,238,0.20) 0%, transparent 100%),
       /* Mid: light spreads */
-      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(175,185,215,0.10) 0%, transparent 100%),
+      radial-gradient(ellipse 60% 55% at 50% 35%, rgba(185,195,228,0.14) 0%, transparent 100%),
       /* Lower: wide cool wash */
-      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(165,178,210,0.06) 0%, transparent 100%),
-      /* Base */
-      linear-gradient(180deg, #1c2240 0%, #151a34 40%, #0e1228 100%);
+      radial-gradient(ellipse 75% 50% at 50% 60%, rgba(175,188,220,0.08) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #141a34 0%, #0e1228 40%, #080c1e 100%);
     background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
