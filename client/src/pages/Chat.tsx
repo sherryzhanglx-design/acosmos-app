@@ -719,7 +719,6 @@ export default function Chat() {
                     <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                       What's weighing on you? Take your time.
                     </p>
-                    <DrawCardButton onClick={() => setShowCardDrawer(true)} />
                   </>
                 )
               ) : selectedRole?.slug === 'relationships' ? (
@@ -898,42 +897,39 @@ export default function Chat() {
               <span className="text-red-400 text-xs animate-pulse self-center">Recording...</span>
             )}
 
-            {/* Draw Card Button - Only for Anya (anxiety) */}
-            {selectedRole?.slug === "anxiety" && (
-              <>
-                <button
-                  onClick={() => setShowCardDrawer(true)}
-                  disabled={isLoading || streamingMessageId !== null}
-                  className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-amber-400/80 hover:bg-amber-500/10 hover:text-amber-400 border border-amber-500/20"
-                  title="Draw a reflection card"
-                >
-                  <Sparkles className="w-5 h-5" />
-                </button>
-                {/* Card History Button - Only show if there are cards in history */}
-                {cardHistory.length > 0 && (
-                  <button
-                    onClick={() => setShowCardHistory(true)}
-                    disabled={isLoading || streamingMessageId !== null}
-                    className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-teal/80 hover:bg-teal/10 hover:text-teal border border-teal/20 relative"
-                    title="View card history"
-                  >
-                    <History className="w-5 h-5" />
-                    <span className="absolute -top-1 -right-1 bg-teal text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                      {cardHistory.length}
-                    </span>
-                  </button>
-                )}
-              </>
-            )}
-
             {/* Text Input */}
             <div className="flex-1 relative">
+              {/* Draw Card & History Buttons - Above textarea, left-aligned, for Anya only */}
+              {selectedRole?.slug === "anxiety" && (
+                <div className="flex items-center gap-2 mb-1.5">
+                  <button
+                    onClick={() => setShowCardDrawer(true)}
+                    disabled={isLoading || streamingMessageId !== null}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-300 text-amber-400/80 hover:bg-amber-500/10 hover:text-amber-400 text-xs font-medium"
+                    title="Draw a reflection card"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Draw a card
+                  </button>
+                  {cardHistory.length > 0 && (
+                    <button
+                      onClick={() => setShowCardHistory(true)}
+                      disabled={isLoading || streamingMessageId !== null}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-300 text-white/50 hover:bg-white/5 hover:text-white/70 text-xs relative"
+                      title="View card history"
+                    >
+                      <History className="w-3.5 h-3.5" />
+                      <span className="text-xs">{cardHistory.length}</span>
+                    </button>
+                  )}
+                </div>
+              )}
               <textarea
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Share what's on your mind..."
+                placeholder={selectedRole?.slug === 'anxiety' ? "Share what's on your mind, or draw a card to start..." : "Share what's on your mind..."}
                 disabled={isLoading || streamingMessageId !== null}
                 rows={4}
                 className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all text-base"
