@@ -653,13 +653,27 @@ export default function Chat() {
               {selectedRole?.slug === 'career' ? (
                 // Andy's welcome
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Andy.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I help you think about career and life direction — not by giving answers, but by helping you see what's already there.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Let the beauty of what you love be what you do." — Rumi
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I help you think about career and life direction
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-4 text-sm">
+                    — not by giving answers, but by helping you see what's already there.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto text-sm">
                     You don't need to know where to start. Just tell me what's on your mind.
                   </p>
                 </>
