@@ -200,51 +200,39 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Body copy — the narrative hook */}
+          {/* Body copy — consolidated narrative */}
           <div className="max-w-2xl mx-auto mb-4">
-            <p className="text-lg md:text-xl text-white/60 leading-relaxed">
+            <p className="text-base md:text-lg text-white/60 leading-relaxed mb-6">
               Inside each of us lies a luminous cosmos.
               <br />
-              <span className="text-white/50">Every planet mirrors an aspect of our life.</span>
+              Every planet mirrors an aspect of our life — career, love, emotions, identity.
+            </p>
+            <p className="text-base md:text-lg text-white/50 leading-relaxed mb-6">
+              When life shifts, some of these may feel lost in the dark.
+            </p>
+            <p className="text-base md:text-lg text-white/50 leading-relaxed mb-6">
+              A.Cosmos is a circle of AI guides,
+              <br />
+              each one here to help you see what you can't see alone.
+            </p>
+            <p className="text-base md:text-lg text-amber-400/70 font-light">
+              Choose a guide. Begin a conversation with yourself.
             </p>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          SECTION 2 — Narrative transition + Smart Triage
-          "But when life shifts..." → dialogue bubble
+          SECTION 2 — Smart Triage
           ═══════════════════════════════════════════════════ */}
       <section 
         ref={narrativeRef}
         className="relative z-10 pt-4 pb-12 md:pt-6 md:pb-16 px-6"
       >
         <div className="max-w-3xl mx-auto text-center">
-          {/* Narrative text with fade-in */}
-          <div 
-            className="mb-10 transition-all duration-1000 ease-out"
-            style={{
-              opacity: narrativeVisible ? 1 : 0,
-              transform: narrativeVisible ? 'translateY(0)' : 'translateY(30px)',
-            }}
-          >
-            <p className="text-lg md:text-xl text-white/55 leading-relaxed mb-4">
-              But when life shifts, some planets may slow down… or drift off course.
-            </p>
-            <p className="text-base md:text-lg text-white/40 leading-relaxed mb-6">
-              A.Cosmos — a constellation of guardians, born to guide your inner universe.
-            </p>
-            <p className="text-sm md:text-base text-white/35 leading-relaxed max-w-2xl mx-auto mb-8">
-              In the realm of stars, they are timeless mythic beings. In your everyday life, they become your coaches, mentors, friends — to ask powerful questions, and walk with you through choices, change, and growth.
-            </p>
-            <p className="text-base md:text-lg text-amber-400/70 font-light">
-              Choose a guardian. Begin a conversation with yourself.
-            </p>
-          </div>
-
           {/* Smart Triage Dialogue Bubble */}
           <div 
-            className="transition-all duration-1000 ease-out delay-500"
+            className="transition-all duration-1000 ease-out"
             style={{
               opacity: narrativeVisible ? 1 : 0,
               transform: narrativeVisible ? 'translateY(0)' : 'translateY(20px)',
