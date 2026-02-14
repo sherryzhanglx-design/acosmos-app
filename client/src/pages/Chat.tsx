@@ -754,17 +754,33 @@ export default function Chat() {
               ) : selectedRole?.slug === 'transformation' ? (
                 // Axel's welcome
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Axel.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I don't do comfort. I point at patterns you might prefer not to see.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Maybe you are searching among the branches
+                    <br />
+                    for what only appears in the roots." — Rumi
                   </p>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    You decide what to do with them. We can stop anytime.
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I don't do comfort.
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
-                    What's on your mind?
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I point at patterns you might prefer not to see.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    You decide what to do with them.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
+                    What's on your mind? We can stop anytime.
                   </p>
                 </>
               ) : (
