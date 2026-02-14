@@ -899,7 +899,7 @@ export default function Chat() {
 
             {/* Text Input */}
             <div className="flex-1 relative">
-              {/* Draw Card & History Buttons - Above textarea, left-aligned, for Anya only */}
+              {/* Draw Card Button - Above textarea, left-aligned, for Anya only */}
               {selectedRole?.slug === "anxiety" && (
                 <div className="flex items-center gap-2 mb-1.5">
                   <button
@@ -911,17 +911,6 @@ export default function Chat() {
                     <Sparkles className="w-3.5 h-3.5" />
                     Draw a card
                   </button>
-                  {cardHistory.length > 0 && (
-                    <button
-                      onClick={() => setShowCardHistory(true)}
-                      disabled={isLoading || streamingMessageId !== null}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-300 text-white/50 hover:bg-white/5 hover:text-white/70 text-xs relative"
-                      title="View card history"
-                    >
-                      <History className="w-3.5 h-3.5" />
-                      <span className="text-xs">{cardHistory.length}</span>
-                    </button>
-                  )}
                 </div>
               )}
               <textarea
