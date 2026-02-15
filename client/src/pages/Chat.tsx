@@ -622,7 +622,7 @@ export default function Chat() {
           
           <div className="flex items-center gap-2">
             <button
-              onClick={() => navigate("/history")}
+              onClick={() => navigate("/account/conversations")}
               className="p-2 rounded-lg hover:bg-white/10 transition-colors"
               title="View conversation history"
             >

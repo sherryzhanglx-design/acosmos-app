@@ -151,7 +151,7 @@ export default function Home() {
                   variant="ghost"
                   size="sm"
                   className="text-white/80 hover:text-amber-400 hover:bg-white/5 px-2 sm:px-3"
-                  onClick={() => navigate("/history")}
+                  onClick={() => navigate("/account/conversations")}
                 >
                   <History className="w-4 h-4 sm:mr-2" />
                   <span className="hidden sm:inline">History</span>
