@@ -60,7 +60,7 @@ export default function UserAvatarMenu() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 glass-card border border-white/10 rounded-xl shadow-xl overflow-hidden z-50">
+        <div className="absolute right-0 mt-2 w-64 bg-[#0a0a0f]/95 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl overflow-hidden z-50">
           {/* User Info Section */}
           <div className="p-4 border-b border-white/10">
             <p className="text-white font-medium truncate">{user?.name || "User"}</p>

@@ -7,6 +7,7 @@ import { useLocation } from "wouter";
 import CosmicBreath from "@/components/CosmicBreath";
 import GoldenGlow from "@/components/GoldenGlow";
 import SmartTriage from "@/components/SmartTriage";
+import UserAvatarMenu from "@/components/UserAvatarMenu";
 import { 
   Briefcase, Crown, Heart, Leaf, Sparkles, Compass, Globe, Brain,
   ArrowRight, MessageCircle, History, ChevronDown, Layers,
@@ -155,12 +156,7 @@ export default function Home() {
                   <History className="w-4 h-4 sm:mr-2" />
                   <span className="hidden sm:inline">History</span>
                 </Button>
-                <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black text-xs sm:text-sm font-medium">
-                    {user?.name?.charAt(0) || "U"}
-                  </div>
-                  <span className="hidden sm:inline text-white/90 text-sm">{user?.name || "User"}</span>
-                </div>
+                <UserAvatarMenu />
               </>
             ) : (
               <Button
