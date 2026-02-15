@@ -134,7 +134,7 @@ export default function Home() {
       )}
 
       {/* Navigation — fixed top */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-b from-black/60 to-transparent">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-b from-black/60 to-transparent" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <img 

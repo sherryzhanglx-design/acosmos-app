@@ -590,7 +590,7 @@ export default function Chat() {
   return (
     <div className={`h-screen flex flex-col ${getCoachBgClass()}`}>
       {/* Header */}
-      <header className="flex-shrink-0 px-4 py-3 border-b border-white/10 glass-card">
+      <header className="flex-shrink-0 px-4 py-3 border-b border-white/10 glass-card relative z-50" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}>
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button

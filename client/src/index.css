@@ -496,3 +496,21 @@ html, body {
     padding-top: env(safe-area-inset-top);
   }
 }
+
+/* PWA Safe Area Support - Avoid status bar overlap */
+@supports (padding-top: env(safe-area-inset-top)) {
+  /* Add safe area padding to body */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Ensure fixed headers respect safe area */
+  header.fixed,
+  nav.fixed,
+  .fixed-top {
+    padding-top: calc(env(safe-area-inset-top) + 0.75rem);
+  }
+}
