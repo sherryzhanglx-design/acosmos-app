@@ -56,7 +56,7 @@ export default function AccountCards() {
   });
 
   const guardians = [
-    { slug: '', name: 'All Guardians' },
+    { slug: '', name: 'All Guides' },
     { slug: 'Andy', name: 'Andy' },
     { slug: 'Anya', name: 'Anya' },
     { slug: 'Alma', name: 'Alma' },
@@ -131,7 +131,7 @@ export default function AccountCards() {
             />
           </div>
 
-          {/* Guardian Filter */}
+          {/* Guide Filter */}
           <select
             value={selectedGuardian}
             onChange={(e) => setSelectedGuardian(e.target.value)}

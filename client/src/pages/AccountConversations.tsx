@@ -127,7 +127,7 @@ export default function AccountConversations() {
             onChange={(e) => setSelectedGuardian(e.target.value)}
             className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
           >
-            <option value="all">All Guardians</option>
+            <option value="all">All Guides</option>
             {roles?.map((role) => (
               <option key={role.id} value={role.id.toString()}>
                 {role.name}
@@ -156,7 +156,7 @@ export default function AccountConversations() {
               <p className="text-white/40 text-sm">
                 {searchQuery || selectedGuardian !== "all"
                   ? "Try adjusting your search or filter"
-                  : "Start a conversation with one of your Guardians"}
+                  : "Start a conversation with one of your Guides"}
               </p>
             </div>
           )}

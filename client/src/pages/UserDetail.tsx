@@ -367,7 +367,7 @@ export default function UserDetail() {
                   <MessageSquare className="w-5 h-5 text-purple-400" />
                   Recent Conversations
                 </CardTitle>
-                <CardDescription className="text-gray-400">Latest conversations with guardians</CardDescription>
+                <CardDescription className="text-gray-400">Latest conversations with guides</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 max-h-80 overflow-y-auto">

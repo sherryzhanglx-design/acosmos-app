@@ -173,7 +173,7 @@ export default function AccountDashboard() {
             <div className="text-center py-8 text-white/50">
               <p>No recent activity yet.</p>
               <p className="text-sm mt-2">
-                Start a conversation with one of your Guardians to begin your
+                Start a conversation with one of your Guides to begin your
                 journey.
               </p>
             </div>
@@ -186,7 +186,7 @@ export default function AccountDashboard() {
             Continue Your Journey
           </h3>
           <p className="text-white/60 mb-4">
-            Choose a Guardian to continue your exploration
+            Choose a Guide to continue your exploration
           </p>
           <a
             href="/"
