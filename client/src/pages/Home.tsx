@@ -141,7 +141,6 @@ export default function Home() {
               alt="A.Cosmos" 
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl object-cover shadow-lg shadow-amber-500/20"
             />
-            <span className="text-lg sm:text-xl font-semibold text-gold-gradient">A.Cosmos</span>
           </div>
           
           <div className="flex items-center gap-2 sm:gap-4">
@@ -200,51 +199,39 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Body copy — the narrative hook */}
+          {/* Body copy — consolidated narrative */}
           <div className="max-w-2xl mx-auto mb-4">
-            <p className="text-lg md:text-xl text-white/60 leading-relaxed">
+            <p className="text-base md:text-lg text-white/60 leading-relaxed mb-6">
               Inside each of us lies a luminous cosmos.
               <br />
-              <span className="text-white/50">Every planet mirrors an aspect of our life.</span>
+              Every planet mirrors an aspect of our life — career, love, emotions, identity.
+            </p>
+            <p className="text-base md:text-lg text-white/50 leading-relaxed mb-6">
+              When life shifts, some of these may feel lost in the dark.
+            </p>
+            <p className="text-base md:text-lg text-white/50 leading-relaxed mb-6">
+              A.Cosmos is a circle of AI guides,
+              <br />
+              each one here to help you see what you can't see alone.
+            </p>
+            <p className="text-base md:text-lg text-amber-400/70 font-light">
+              Choose a guide. Begin a conversation with yourself.
             </p>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          SECTION 2 — Narrative transition + Smart Triage
-          "But when life shifts..." → dialogue bubble
+          SECTION 2 — Smart Triage
           ═══════════════════════════════════════════════════ */}
       <section 
         ref={narrativeRef}
         className="relative z-10 pt-4 pb-12 md:pt-6 md:pb-16 px-6"
       >
         <div className="max-w-3xl mx-auto text-center">
-          {/* Narrative text with fade-in */}
-          <div 
-            className="mb-10 transition-all duration-1000 ease-out"
-            style={{
-              opacity: narrativeVisible ? 1 : 0,
-              transform: narrativeVisible ? 'translateY(0)' : 'translateY(30px)',
-            }}
-          >
-            <p className="text-lg md:text-xl text-white/55 leading-relaxed mb-4">
-              But when life shifts, some planets may slow down… or drift off course.
-            </p>
-            <p className="text-base md:text-lg text-white/40 leading-relaxed mb-6">
-              A.Cosmos — a constellation of guardians, born to guide your inner universe.
-            </p>
-            <p className="text-sm md:text-base text-white/35 leading-relaxed max-w-2xl mx-auto mb-8">
-              In the realm of stars, they are timeless mythic beings. In your everyday life, they become your coaches, mentors, friends — to ask powerful questions, and walk with you through choices, change, and growth.
-            </p>
-            <p className="text-base md:text-lg text-amber-400/70 font-light">
-              Choose a guardian. Begin a conversation with yourself.
-            </p>
-          </div>
-
           {/* Smart Triage Dialogue Bubble */}
           <div 
-            className="transition-all duration-1000 ease-out delay-500"
+            className="transition-all duration-1000 ease-out"
             style={{
               opacity: narrativeVisible ? 1 : 0,
               transform: narrativeVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -266,7 +253,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          SECTION 3 — "Your Constellation of Guardians"
+          SECTION 3 — "Your Constellation of Guides"
           Guardian cards
           ═══════════════════════════════════════════════════ */}
       <section 
@@ -282,10 +269,10 @@ export default function Home() {
             }}
           >
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
-              Your Constellation of Guardians
+              Your Constellation of Guides
             </h2>
             <p className="text-white/50 max-w-lg mx-auto text-sm md:text-base">
-              Wherever you are, whenever you need, they're here — quietly standing by.
+              Wherever you are, whenever you need, they're here<br />— quietly standing by.
             </p>
           </div>
 
@@ -349,7 +336,7 @@ export default function Home() {
                       <p className={`text-sm font-medium tracking-wide transition-colors ${isHovered ? 'text-amber-400/80' : 'text-white/50'}`}>
                         {{
                           career: 'Career',
-                          anxiety: 'Calm',
+                          anxiety: 'Emotions',
                           relationships: 'Love',
                           transformation: 'Blind Spots',
                           leadership: 'Leadership',
@@ -413,7 +400,7 @@ export default function Home() {
                       <p className="text-white/40 text-sm font-medium tracking-wide">
                         {{
                           career: 'Career',
-                          anxiety: 'Calm',
+                          anxiety: 'Emotions',
                           relationships: 'Love',
                           transformation: 'Blind Spots',
                           leadership: 'Leadership',
@@ -437,42 +424,51 @@ export default function Home() {
      </div>
    </section>
 
-      {/* Apex Module — Preserved for future update */}
-      <section className="relative z-10 py-12 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <button
-              onClick={() => isAuthenticated ? navigate("/chat") : window.location.href = getLoginUrl()}
-              className="group p-6 rounded-2xl text-left transition-all duration-300 hover:scale-[1.02] hover:border-amber-500/50 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <MessageCircle className="w-6 h-6 text-amber-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors">
-                Guided Reflection
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Engage in meaningful, distraction-free conversations with your AI guide.
-              </p>
-            </button>
+      {/* Apex Module — The Bigger Picture */}
+      <section className="relative z-10 py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div
+            className="group p-8 rounded-2xl text-center transition-all duration-300 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
+          >
+            {/* Apex Avatar */}
+            <div className="w-24 h-24 mx-auto mb-3">
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663273647099/yTDtbvJnQEGDaybl.png"
+                alt="Apex"
+                className="w-full h-full object-contain"
+              />
+            </div>
 
-            <button
-              onClick={() => isAuthenticated ? navigate("/reflection") : window.location.href = getLoginUrl()}
-              className="group p-6 rounded-2xl text-left transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/50 border border-white/8 backdrop-blur-sm bg-white/[0.04]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Layers className="w-6 h-6 text-purple-400" />
+            <h3 className="text-2xl font-bold text-white mb-1">Apex</h3>
+            <h4 className="text-lg font-semibold text-white/80 mb-3">The Bigger Picture</h4>
+
+            <p className="text-amber-400/90 italic text-sm font-serif mb-4">
+              "Every voice you've heard is yours. Now listen to them together."
+            </p>
+
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              Apex sees what no single guide can — the patterns across your conversations,<br />
+              the threads connecting career to love to identity to emotions.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left mb-6">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                <p className="text-white font-semibold mb-1.5">Round Table</p>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  Invite 2–3 guides into one conversation. Hear different perspectives on the same question, side by side.
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                Reflection & Integration
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Meet Apex — synthesize insights across guardians for deeper understanding.
-              </p>
-              <span className="inline-block mt-2 text-xs text-purple-400/80 bg-purple-500/10 px-2 py-1 rounded-full">
-                Coming Soon
-              </span>
-            </button>
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                <p className="text-white font-semibold mb-1.5">Growth Map</p>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  Bring your conversation summaries together. Apex finds the patterns, traces your trajectory, and shows you how far you've come.
+                </p>
+              </div>
+            </div>
+
+            <span className="inline-block text-xs text-purple-400/80 bg-purple-500/10 px-3 py-1.5 rounded-full">
+              Coming soon for Pro members
+            </span>
           </div>
         </div>
       </section>
@@ -485,7 +481,7 @@ export default function Home() {
               <h4 className="text-white font-semibold mb-4">Product</h4>
               <ul className="space-y-2">
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Features</a></li>
-                <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Guardians</a></li>
+                <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">AI Guides</a></li>
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Pricing</a></li>
                 <li><a href="#" className="text-white/50 hover:text-amber-400 text-sm transition-colors">Mobile App</a></li>
               </ul>

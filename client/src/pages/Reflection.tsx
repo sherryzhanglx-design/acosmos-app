@@ -187,7 +187,7 @@ export default function Reflection() {
             </div>
             
             <p className="text-white/50 text-sm mb-6">
-              Select past conversations from your guardians, or import sessions from elsewhere.
+              Select past conversations from your guides, or import sessions from elsewhere.
             </p>
 
             {conversationsLoading ? (
@@ -202,7 +202,7 @@ export default function Reflection() {
                   className="text-purple-400 hover:text-purple-300"
                   onClick={() => navigate("/chat")}
                 >
-                  Start a conversation with a Guardian
+                  Start a conversation with a guide
                 </Button>
               </div>
             ) : (

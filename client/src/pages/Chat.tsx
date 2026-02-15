@@ -582,7 +582,7 @@ export default function Chat() {
       case 'career': return 'coach-bg-andy';
       case 'anxiety': return 'coach-bg-anya';
       case 'relationships': return 'coach-bg-alma';
-      case 'mirror': return 'coach-bg-axel';
+      case 'transformation': return 'coach-bg-axel';
       default: return 'cinematic-bg';
     }
   };
@@ -637,13 +637,12 @@ export default function Chat() {
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
           {messages.length === 0 && (
-            <div className="text-center py-20">
+            <div className="text-center py-4">
               <div 
-                className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center overflow-hidden"
-                style={{ backgroundColor: `${selectedRole?.color}20` }}
+                className="w-24 h-24 mx-auto mb-6 flex items-center justify-center"
               >
                 {selectedRole?.avatar ? (
-                  <img src={selectedRole.avatar} alt={selectedRole.name} className="w-[85%] h-[85%] object-contain object-center" />
+                  <img src={selectedRole.avatar} alt={selectedRole.name} className="w-full h-full object-contain object-center" />
                 ) : (
                   <IconComponent className="w-10 h-10" color={selectedRole?.color || undefined} />
                 )}
@@ -652,14 +651,34 @@ export default function Chat() {
               {selectedRole?.slug === 'career' ? (
                 // Andy's welcome
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Andy.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I help you think about career and life direction — not by giving answers, but by helping you see what's already there.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Let the beauty of what you love be what you do." — Rumi
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
-                    You don't need to know where to start. Just tell me what's on your mind.
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I help you think about career and life direction
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    — not by giving answers,
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    but by helping you see what's already there.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    You don't need to know where to start.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
+                    Just tell me what's on your mind.
                   </p>
                 </>
               ) : selectedRole?.slug === 'anxiety' ? (
@@ -671,45 +690,96 @@ export default function Chat() {
                   />
                 ) : (
                   <>
-                    <h2 className="text-2xl font-semibold text-white mb-3">
+                    <h2 className="text-2xl font-semibold text-white mb-2">
                       I'm Anya.
                     </h2>
-                    <p className="text-white/60 max-w-md mx-auto mb-4">
-                      I'm here to walk beside you — not to fix or calm, but to help you find where you stand.
+                    <p 
+                      className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                      style={{
+                        background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      "You are not a drop in the ocean.<br className="hidden" />
+                      You are the entire ocean in a drop." — Rumi
                     </p>
-                    <p className="text-white/50 max-w-md mx-auto text-sm">
+                    <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                      I'm here to walk beside you
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                      — not to fix or calm,
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                      but to help you find where you stand.
+                    </p>
+                    <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                       What's weighing on you? Take your time.
                     </p>
-                    <DrawCardButton onClick={() => setShowCardDrawer(true)} />
                   </>
                 )
               ) : selectedRole?.slug === 'relationships' ? (
                 // Alma's welcome (love/intimacy)
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Alma.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I'm here to help you see what's happening in your relationships — not to judge, not to fix, just to help you understand.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Your task is not to seek for love,
+                    <br />
+                    but merely to seek and find all the barriers
+                    <br />
+                    within yourself that you have built against it." — Rumi
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I'm here to help you see what's happening in your relationships
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    — not to judge, not to fix, just to help you understand.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
                     What's on your heart? Take your time.
                   </p>
                 </>
               ) : selectedRole?.slug === 'transformation' ? (
                 // Axel's welcome
                 <>
-                  <h2 className="text-2xl font-semibold text-white mb-3">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
                     I'm Axel.
                   </h2>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    I don't do comfort. I point at patterns you might prefer not to see.
+                  <p 
+                    className="text-sm italic max-w-md mx-auto mb-5 font-serif"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37, #f5e6a3, #c5a028)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    "Maybe you are searching among the branches
+                    <br />
+                    for what only appears in the roots." — Rumi
                   </p>
-                  <p className="text-white/60 max-w-md mx-auto mb-4">
-                    You decide what to do with them. We can stop anytime.
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I don't do comfort.
                   </p>
-                  <p className="text-white/50 max-w-md mx-auto text-sm">
-                    What's on your mind?
+                  <p className="text-white/60 max-w-md mx-auto mb-1 text-sm">
+                    I point at patterns you might prefer not to see.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-5 text-sm">
+                    You decide what to do with them.
+                  </p>
+                  <p className="text-white/60 max-w-md mx-auto mb-0 text-sm">
+                    What's on your mind? We can stop anytime.
                   </p>
                 </>
               ) : (
@@ -836,7 +906,7 @@ export default function Chat() {
       </div>
 
       {/* Input Area */}
-      <div className="flex-shrink-0 px-4 py-4 border-t border-white/10">
+      <div className="flex-shrink-0 px-4 py-2">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-end gap-3">
             {/* Voice Input Button */}
@@ -859,46 +929,32 @@ export default function Chat() {
               <span className="text-red-400 text-xs animate-pulse self-center">Recording...</span>
             )}
 
-            {/* Draw Card Button - Only for Anya (anxiety) */}
-            {selectedRole?.slug === "anxiety" && (
-              <>
-                <button
-                  onClick={() => setShowCardDrawer(true)}
-                  disabled={isLoading || streamingMessageId !== null}
-                  className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-amber-400/80 hover:bg-amber-500/10 hover:text-amber-400 border border-amber-500/20"
-                  title="Draw a reflection card"
-                >
-                  <Sparkles className="w-5 h-5" />
-                </button>
-                {/* Card History Button - Only show if there are cards in history */}
-                {cardHistory.length > 0 && (
-                  <button
-                    onClick={() => setShowCardHistory(true)}
-                    disabled={isLoading || streamingMessageId !== null}
-                    className="flex-shrink-0 p-3 rounded-xl transition-all duration-300 bg-white/5 text-teal/80 hover:bg-teal/10 hover:text-teal border border-teal/20 relative"
-                    title="View card history"
-                  >
-                    <History className="w-5 h-5" />
-                    <span className="absolute -top-1 -right-1 bg-teal text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                      {cardHistory.length}
-                    </span>
-                  </button>
-                )}
-              </>
-            )}
-
             {/* Text Input */}
             <div className="flex-1 relative">
+              {/* Draw Card Button - Above textarea, left-aligned, for Anya only */}
+              {selectedRole?.slug === "anxiety" && (
+                <div className="flex items-center gap-2 mb-1.5">
+                  <button
+                    onClick={() => setShowCardDrawer(true)}
+                    disabled={isLoading || streamingMessageId !== null}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-300 text-amber-400/80 hover:bg-amber-500/10 hover:text-amber-400 text-xs font-medium"
+                    title="Draw a reflection card"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Draw a card
+                  </button>
+                </div>
+              )}
               <textarea
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Share what's on your mind..."
+                placeholder={selectedRole?.slug === 'anxiety' ? "Share what's on your mind, or draw a card to start..." : "Share what's on your mind..."}
                 disabled={isLoading || streamingMessageId !== null}
-                rows={1}
-                className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
-                style={{ maxHeight: "150px" }}
+                rows={4}
+                className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/40 resize-none focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all text-base"
+                style={{ maxHeight: "240px" }}
               />
             </div>
 
@@ -916,8 +972,8 @@ export default function Chat() {
             </Button>
           </div>
           
-          <p className="text-center text-white/30 text-xs mt-3">
-            Your conversations are private and secure
+          <p className="text-center text-white/50 text-xs mt-3">
+            Your conversations are private and secure. <a href="/privacy" className="text-amber-400/70 hover:text-amber-400 hover:underline transition-colors">Privacy Policy</a>
           </p>
         </div>
       </div>

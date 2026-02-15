@@ -76,7 +76,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
               What's on your mind today?
             </p>
             <p className="text-white/40 text-xs mt-1">
-              Share what you're feeling or thinking — I'll guide you to the right Guardian.
+              Share what you're feeling or thinking — I'll match you with the right guide.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
             </div>
             <div className="flex items-center gap-2 py-3">
               <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
-              <span className="text-white/50 text-sm">Finding the right Guardian for you...</span>
+              <span className="text-white/50 text-sm">Finding the right guide for you...</span>
             </div>
           </div>
         )}
@@ -149,10 +149,10 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
               </div>
               <div className="flex-1 text-left">
                 <p className="text-white/70 text-sm leading-relaxed mb-4">
-                  {triageMutation.data.primary.reason || "I think this Guardian can help you."}
+                  {triageMutation.data.primary.reason || "I think this guide can help you."}
                 </p>
 
-                {/* Primary Guardian Card */}
+                {/* Primary Guide Card */}
                 <button
                   onClick={() => onStartConversation(triageMutation.data!.primary.slug)}
                   className="w-full group flex items-center gap-4 p-4 rounded-2xl border border-amber-500/20 
@@ -178,7 +178,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
                   {/* Info */}
                   <div className="flex-1 text-left">
                     <h4 className="text-white font-semibold group-hover:text-amber-400 transition-colors">
-                      {(triageMutation.data.primary as any).name || primaryRole?.name || "Guardian"}
+                      {(triageMutation.data.primary as any).name || primaryRole?.name || "Guide"}
                     </h4>
                     <p className="text-white/40 text-xs mt-0.5">
                       {primaryRole?.description}
@@ -243,7 +243,7 @@ export default function SmartTriage({ roles, isAuthenticated, onStartConversatio
             </div>
             <div className="flex-1 text-left">
               <p className="text-white/60 text-sm mb-2">
-                Something went wrong. You can try again, or browse the Guardians below.
+                Something went wrong. You can try again, or browse the guides below.
               </p>
               <button
                 onClick={handleReset}

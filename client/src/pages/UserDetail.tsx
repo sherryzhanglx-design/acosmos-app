@@ -282,7 +282,7 @@ export default function UserDetail() {
               {/* Coach Usage Distribution */}
               <Card className="bg-cosmos-card border-amber-500/20">
                 <CardHeader>
-                  <CardTitle className="text-white">Guardian Usage</CardTitle>
+                  <CardTitle className="text-white">Guide Usage</CardTitle>
                   <CardDescription className="text-gray-400">Conversations by coach</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -378,7 +378,7 @@ export default function UserDetail() {
                       <div key={conv.id} className="flex items-center justify-between p-3 bg-black/20 rounded-lg hover:bg-black/30 transition-colors">
                         <div className="flex-1 min-w-0">
                           <p className="text-white text-sm truncate">{conv.title || 'Untitled Conversation'}</p>
-                          <p className="text-gray-500 text-xs">with {conv.roleName || 'Unknown Guardian'}</p>
+                          <p className="text-gray-500 text-xs">with {conv.roleName || 'Unknown Guide'}</p>
                         </div>
                         <div className="text-right ml-4">
                           <p className="text-xs text-gray-400">

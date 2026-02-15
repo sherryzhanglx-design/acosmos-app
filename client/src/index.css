@@ -317,86 +317,88 @@
     background-attachment: fixed;
   }
 
-  /* Andy - North Star: Deep blue with constellation lines */
+  /* Andy - North Star: F5 Illuminate — warm golden beam from top */
   .coach-bg-andy {
-    background: 
+    background:
       /* Stars */
-      radial-gradient(1px 1px at 20px 30px, oklch(0.95 0.02 90), transparent),
-      radial-gradient(1px 1px at 80px 60px, oklch(0.9 0.02 90), transparent),
-      radial-gradient(1.5px 1.5px at 150px 100px, oklch(0.95 0.02 90), transparent),
-      radial-gradient(1px 1px at 200px 40px, oklch(0.85 0.02 90), transparent),
-      /* Constellation-like subtle lines */
-      radial-gradient(ellipse at 30% 20%, oklch(0.35 0.08 240 / 0.25) 0%, transparent 40%),
-      radial-gradient(ellipse at 70% 80%, oklch(0.3 0.1 230 / 0.2) 0%, transparent 35%),
-      /* Deep navy blue gradient - North Star theme */
-      linear-gradient(180deg, 
-        oklch(0.14 0.08 240) 0%,
-        oklch(0.11 0.07 245) 40%,
-        oklch(0.08 0.06 250) 100%
-      );
-    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+      radial-gradient(1px 1px at 20px 30px, rgba(255,245,200,0.18), transparent),
+      radial-gradient(1px 1px at 80px 60px, rgba(255,245,200,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 150px 100px, rgba(255,245,200,0.18), transparent),
+      radial-gradient(1px 1px at 200px 40px, rgba(255,245,200,0.12), transparent),
+      /* Top: tight beam origin — warm golden column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(245,220,140,0.22) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(230,195,100,0.18) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(220,180,80,0.12) 0%, transparent 100%),
+      /* Lower: subtle warm glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(210,170,70,0.06) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #151e38 0%, #0e152a 40%, #080d1c 100%);
+    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
 
-  /* Anya - Jupiter: Soft purple-blue with cloud/nebula effects */
+  /* Anya - Jupiter: F5 Illuminate — grounding green beam from top */
   .coach-bg-anya {
-    background: 
-      /* Stars */
-      radial-gradient(1px 1px at 30px 50px, oklch(0.9 0.02 90), transparent),
-      radial-gradient(1px 1px at 100px 80px, oklch(0.85 0.02 90), transparent),
-      radial-gradient(1.5px 1.5px at 180px 120px, oklch(0.9 0.02 90), transparent),
-      /* Soft nebula clouds - calming effect */
-      radial-gradient(ellipse at 20% 70%, oklch(0.28 0.1 280 / 0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 30%, oklch(0.25 0.08 260 / 0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, oklch(0.22 0.06 270 / 0.2) 0%, transparent 60%),
-      /* Purple-blue gradient - Jupiter/calm theme */
-      linear-gradient(180deg, 
-        oklch(0.13 0.07 275) 0%,
-        oklch(0.10 0.06 280) 50%,
-        oklch(0.07 0.05 285) 100%
-      );
-    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background:
+      /* Stars with green-tinted warmth */
+      radial-gradient(1px 1px at 30px 50px, rgba(200,225,200,0.16), transparent),
+      radial-gradient(1px 1px at 100px 80px, rgba(195,220,195,0.12), transparent),
+      radial-gradient(1.5px 1.5px at 180px 120px, rgba(200,225,200,0.16), transparent),
+      /* Top: tight beam origin — sage/forest green column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(160,200,160,0.24) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(140,185,145,0.20) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(125,170,130,0.13) 0%, transparent 100%),
+      /* Lower: subtle earthy green glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(110,155,115,0.06) 0%, transparent 100%),
+      /* Base — deep forest night */
+      linear-gradient(180deg, #121e1a 0%, #0c1612 40%, #070d0a 100%);
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
 
-  /* Alma - Venus: Warm rose-gold with soft glow */
+  /* Alma - Venus: F5 Illuminate — warm rose-gold beam from top */
   .coach-bg-alma {
-    background: 
+    background:
       /* Stars with warmer tint */
-      radial-gradient(1px 1px at 25px 40px, oklch(0.92 0.04 60), transparent),
-      radial-gradient(1px 1px at 90px 70px, oklch(0.88 0.03 70), transparent),
-      radial-gradient(1.5px 1.5px at 160px 110px, oklch(0.9 0.04 55), transparent),
-      /* Warm rose-gold glow effects */
-      radial-gradient(ellipse at 25% 75%, oklch(0.35 0.12 30 / 0.25) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 25%, oklch(0.32 0.1 350 / 0.2) 0%, transparent 40%),
-      /* Warm coral to deep rose gradient - Venus/love theme */
-      linear-gradient(180deg, 
-        oklch(0.14 0.06 340) 0%,
-        oklch(0.11 0.05 350) 50%,
-        oklch(0.08 0.04 0) 100%
-      );
-    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+      radial-gradient(1px 1px at 25px 40px, rgba(255,230,215,0.18), transparent),
+      radial-gradient(1px 1px at 90px 70px, rgba(255,225,210,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 160px 110px, rgba(255,230,215,0.16), transparent),
+      /* Top: tight beam origin — rose-pink column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(248,195,195,0.24) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(238,175,180,0.20) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(228,162,170,0.14) 0%, transparent 100%),
+      /* Lower: subtle rose glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(218,150,160,0.07) 0%, transparent 100%),
+      /* Base — deeper, less brown */
+      linear-gradient(180deg, #1e1520 0%, #15101a 40%, #0a0712 100%);
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
 
-  /* Axel - Mirror: Silver-gray with geometric/prism effects */
+  /* Axel - Mirror: F5 Illuminate — cool silver beam from top */
   .coach-bg-axel {
-    background: 
+    background:
       /* Stars with silver tint */
-      radial-gradient(1px 1px at 20px 35px, oklch(0.95 0.01 260), transparent),
-      radial-gradient(1px 1px at 85px 65px, oklch(0.9 0.01 250), transparent),
-      radial-gradient(1.5px 1.5px at 155px 105px, oklch(0.92 0.01 255), transparent),
-      /* Prism-like subtle reflections */
-      radial-gradient(ellipse at 30% 60%, oklch(0.3 0.06 220 / 0.2) 0%, transparent 35%),
-      radial-gradient(ellipse at 70% 40%, oklch(0.28 0.05 200 / 0.18) 0%, transparent 30%),
-      radial-gradient(ellipse at 50% 80%, oklch(0.25 0.04 240 / 0.15) 0%, transparent 40%),
-      /* Silver-gray to deep blue gradient - Mirror/reflection theme */
-      linear-gradient(180deg, 
-        oklch(0.16 0.03 230) 0%,
-        oklch(0.12 0.04 245) 50%,
-        oklch(0.08 0.05 260) 100%
-      );
-    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+      radial-gradient(1px 1px at 20px 35px, rgba(220,228,248,0.18), transparent),
+      radial-gradient(1px 1px at 85px 65px, rgba(215,225,245,0.14), transparent),
+      radial-gradient(1.5px 1.5px at 155px 105px, rgba(220,228,248,0.16), transparent),
+      /* Top: tight beam origin — white/ice-blue column */
+      radial-gradient(ellipse 15% 20% at 50% 0%, rgba(230,240,255,0.30) 0%, transparent 100%),
+      /* Upper-mid: beam slightly widens */
+      radial-gradient(ellipse 20% 40% at 50% 12%, rgba(215,228,252,0.24) 0%, transparent 100%),
+      /* Mid: gentle spread, still focused */
+      radial-gradient(ellipse 28% 50% at 50% 30%, rgba(200,215,245,0.16) 0%, transparent 100%),
+      /* Lower: subtle cool glow */
+      radial-gradient(ellipse 35% 45% at 50% 55%, rgba(190,205,238,0.08) 0%, transparent 100%),
+      /* Base — deeper */
+      linear-gradient(180deg, #111830 0%, #0b1024 40%, #06091a 100%);
+    background-size: 200px 200px, 200px 200px, 200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
 
